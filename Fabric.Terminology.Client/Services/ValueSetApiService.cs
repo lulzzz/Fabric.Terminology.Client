@@ -1,46 +1,27 @@
 ﻿namespace Fabric.Terminology.Client.Services
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using CallMeMaybe;
+    using Fabric.Terminology.Client.Builder;
     using Fabric.Terminology.Client.Configuration;
     using Fabric.Terminology.Client.Models;
 
-    internal class ValueSetApiService : IValueSetApiService
+    internal class ValueSetApiService : ApiServiceBase, IValueSetApiService
     {
-        private readonly ITerminologyApiSettings settings;
-
         public ValueSetApiService(ITerminologyApiSettings settings)
+            : base(settings, "valuesets")
         {
-            this.settings = settings;
         }
 
-        public ValueSet GetValueSet(string valueSetUniqueId)
+        public Task<Maybe<ValueSet>> GetValueSet(string valueSetUniqueId)
         {
-            throw new System.NotImplementedException();
+            return this.GetApiResult<ValueSet>($"{this.BaseUrl}/{valueSetUniqueId}");
         }
 
-        public ValueSet GetValueSet(string valueSetUniqueId, IEnumerable<string> codeSystemCodes)
+        public Task<Maybe<ValueSet>> GetValueSet(ValueSetSingleRequest request)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public IReadOnlyCollection<ValueSet> GetValueSets(IEnumerable<string> valueSetUniqueId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IReadOnlyCollection<ValueSet> GetValueSets(IEnumerable<string> valueSetUniqueId, IEnumerable<string> codeSystemCodes)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IReadOnlyCollection<ValueSetCode> GetValueSetCodes(string valueSetUniqueId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IReadOnlyCollection<ValueSetCode> GetValueSetCodes(string valueSetUniqueId, IEnumerable<string> codeSystemCodes)
-        {
-            throw new System.NotImplementedException();
+            return this.GetApiResult<ValueSet>($"{this.BaseUrl}/{request.GetEndpoint()}");
         }
     }
 }

@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Builder\ValueSetPageRequest.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="CallMeMaybe" Version="0.6.3.22-alpha" />

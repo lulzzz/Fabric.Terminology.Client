@@ -1,7 +1,7 @@
-﻿using Xunit.Abstractions;
-
-namespace Fabric.Terminology.Client.TestsBase
+﻿namespace Fabric.Terminology.Client.TestsBase
 {
+    using Xunit.Abstractions;
+
     public abstract class OutputTestBase
     {
         protected OutputTestBase(ITestOutputHelper output)
