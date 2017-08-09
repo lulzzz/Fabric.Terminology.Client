@@ -47,11 +47,11 @@ gulp.task("version", ["version:comment"], () => {
             version.build = ddlInfo.parsedVersion.build;
         }
         var info = {
-            title: "Fabric.Terminology",
-            description: "Service to provide shared healthcare terminology data",
+            title: "Fabric.Terminology.Client",
+            description: "C# .NET client for the Fabric.Terminology.API.",
             configuration: "",
             company: "Health Catalyst",
-            product: "Fabric.Terminology",
+            product: "Fabric.Terminology.Client",
             copyright: "Copyright " + new Date().getFullYear() + " \u00A9 Health Catalyst",
             trademark: "",
             culture: "",
