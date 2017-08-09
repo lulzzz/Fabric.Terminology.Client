@@ -1,9 +1,11 @@
-﻿namespace Fabric.Terminology.Client.Services
+﻿using System;
+
+namespace Fabric.Terminology.Client.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using CallMeMaybe;
-    using Fabric.Terminology.Client.Builder;
+    using Fabric.Terminology.Client.Builders;
     using Fabric.Terminology.Client.Configuration;
     using Fabric.Terminology.Client.Models;
 
@@ -24,9 +26,15 @@
             return this.GetApiResultList<ValueSet>(this.BuildHttpGetUrl(request));
         }
 
-        public Task<PagedCollection<ValueSet>> GetValueSetPage(ValueSetPageRequest request)
+        public Task<PagedCollection<ValueSet>> GetValueSetPage(ValueSetPagedRequest request)
         {
             return this.GetApiResultPage<ValueSet>(this.BuildHttpGetUrl(request));
+        }
+
+        public Task<PagedCollection<ValueSet>> FindValueSetPage(ValueSetSearchRequest request)
+        {
+            //return this.PostApiResult<ValueSet>()
+            throw new NotImplementedException();
         }
 
         private string BuildHttpGetUrl(IApiGetRequest request)

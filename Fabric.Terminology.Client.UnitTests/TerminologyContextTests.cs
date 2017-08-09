@@ -1,6 +1,7 @@
-﻿namespace Fabric.Terminology.Client.UnitTests
+﻿using Fabric.Terminology.Client.Builders;
+
+namespace Fabric.Terminology.Client.UnitTests
 {
-    using Fabric.Terminology.Client.Builder;
     using Fabric.Terminology.Client.TestsBase;
     using Fabric.Terminology.Client.TestsBase.Fixtures;
     using FluentAssertions;
@@ -40,6 +41,7 @@
             var single = this.terminology.ValueSets.WithUniqueId("somestring");
             var list = this.terminology.ValueSets.WithUniqueIdsIn(new[] {"one", "two"});
             var page = this.terminology.ValueSets.Paged();
+            var search = this.terminology.ValueSets.Search("term");
 
             // Assert
             single.Should().NotBeNull();
@@ -47,7 +49,9 @@
             list.Should().NotBeNull();
             list.GetType().Should().Be(typeof(ValueSetListRequest));
             page.Should().NotBeNull();
-            page.GetType().Should().Be(typeof(ValueSetPageRequest));
+            page.GetType().Should().Be(typeof(ValueSetPagedRequest));
+            search.Should().NotBeNull();
+            search.GetType().Should().Be(typeof(ValueSetSearchRequest));
         }
     }
 }

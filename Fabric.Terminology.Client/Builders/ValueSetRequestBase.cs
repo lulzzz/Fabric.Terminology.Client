@@ -1,5 +1,5 @@
 ﻿#pragma warning disable SA1402 // File may only contain a single class
-namespace Fabric.Terminology.Client.Builder
+namespace Fabric.Terminology.Client.Builders
 {
     using System;
     using System.Collections.Generic;
@@ -27,7 +27,7 @@ namespace Fabric.Terminology.Client.Builder
             this.valueSetApiService = service;
         }
 
-        internal bool SummaryCodeList { get; set; }
+        internal bool Summary { get; set; }
 
         internal IEnumerable<string> CodeSystemCodeFilters => this.codeSytemCodes;
 
@@ -42,7 +42,7 @@ namespace Fabric.Terminology.Client.Builder
         {
             var qs = string.Empty;
 
-            if (this.SummaryCodeList)
+            if (this.Summary)
             {
                 qs += $"$summary=true";
             }

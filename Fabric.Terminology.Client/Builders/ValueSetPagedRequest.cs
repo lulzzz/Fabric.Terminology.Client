@@ -1,15 +1,15 @@
-﻿namespace Fabric.Terminology.Client.Builder
+﻿namespace Fabric.Terminology.Client.Builders
 {
     using System;
     using System.Threading.Tasks;
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetPageRequest : ValueSetRequestBase<Task<PagedCollection<ValueSet>>>, IApiGetRequest
+    public class ValueSetPagedRequest : ValueSetPagedRequestBase, IApiGetRequest
     {
         private readonly PagerSettings pagerSettings;
 
-        public ValueSetPageRequest(Lazy<IValueSetApiService> valueSetApiService, PagerSettings pagerSettings)
+        public ValueSetPagedRequest(Lazy<IValueSetApiService> valueSetApiService, PagerSettings pagerSettings)
             : base(valueSetApiService)
         {
             this.EnsurePagerSettings(pagerSettings);
@@ -27,19 +27,6 @@
             var qs = this.BuildQueryString();
 
             return qs.IsNullOrWhiteSpace() ? $"?{pageQs}" : $"{qs}&{pageQs}";
-        }
-
-        private void EnsurePagerSettings(PagerSettings settings)
-        {
-            if (settings.CurrentPage <= 0)
-            {
-                settings.CurrentPage = 1;
-            }
-
-            if (settings.ItemsPerPage < 0)
-            {
-                settings.ItemsPerPage = 10;
-            }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Fabric.Terminology.Client
 {
-    using Fabric.Terminology.Client.Builder;
+    using Fabric.Terminology.Client.Builders;
     using Fabric.Terminology.Client.Configuration;
 
     public class TerminologyContext : ITerminologyContext

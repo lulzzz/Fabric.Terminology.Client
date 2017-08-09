@@ -1,4 +1,4 @@
-﻿namespace Fabric.Terminology.Client.Builder
+﻿namespace Fabric.Terminology.Client.Builders
 {
     using System;
     using System.Collections.Generic;
