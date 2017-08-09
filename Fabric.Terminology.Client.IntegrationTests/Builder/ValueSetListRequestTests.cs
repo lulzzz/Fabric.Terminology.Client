@@ -27,7 +27,7 @@
             };
 
             // Act
-            var query = this.Terminology.ValueSets.WithUniqueIdsIn(ids);
+            var query = this.TerminologyContext.ValueSets.WithUniqueIdsIn(ids);
 
             var valueSets = this.Profiler.ExecuteTimed(async () => await query.Execute());
 

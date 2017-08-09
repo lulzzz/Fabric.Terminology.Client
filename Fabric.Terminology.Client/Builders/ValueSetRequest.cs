@@ -1,4 +1,4 @@
-﻿namespace Fabric.Terminology.Client.Builder
+﻿namespace Fabric.Terminology.Client.Builders
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,7 @@
     {
         private Lazy<IValueSetApiService> valueSetApiService;
 
-        public ValueSetRequest(ITerminologyApiSettings settings)
+        internal ValueSetRequest(ITerminologyApiSettings settings)
         {
             this.Initialize(settings);
         }
@@ -25,12 +25,12 @@
             return new ValueSetListRequest(this.valueSetApiService, valueSetUniqueIds);
         }
 
-        public ValueSetPageRequest Paged()
+        public ValueSetPagedRequest Paged()
         {
             return this.Paged(new PagerSettings());
         }
 
-        public ValueSetPageRequest Paged(int currentPage, int itemsPerPage = 20)
+        public ValueSetPagedRequest Paged(int currentPage, int itemsPerPage = 20)
         {
             var pagerSettings = new PagerSettings
             {
@@ -41,9 +41,30 @@
             return this.Paged(pagerSettings);
         }
 
-        public ValueSetPageRequest Paged(PagerSettings pagerSettings)
+        public ValueSetPagedRequest Paged(PagerSettings pagerSettings)
         {
-            return new ValueSetPageRequest(this.valueSetApiService, pagerSettings);
+            return new ValueSetPagedRequest(this.valueSetApiService, pagerSettings);
+        }
+
+        public ValueSetSearchRequest Search(string term)
+        {
+            return this.Search(term, 1);
+        }
+
+        public ValueSetSearchRequest Search(string term, int currentPage, int itemsPerPage = 20)
+        {
+            var pagerSettings = new PagerSettings
+            {
+                CurrentPage = currentPage,
+                ItemsPerPage = itemsPerPage
+            };
+
+            return this.Search(term, pagerSettings);
+        }
+
+        public ValueSetSearchRequest Search(string term, PagerSettings pagerSettings)
+        {
+            return new ValueSetSearchRequest(this.valueSetApiService, term, pagerSettings);
         }
 
         private void Initialize(ITerminologyApiSettings settings)

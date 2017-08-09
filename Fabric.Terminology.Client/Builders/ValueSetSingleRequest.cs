@@ -1,4 +1,4 @@
-﻿namespace Fabric.Terminology.Client.Builder
+﻿namespace Fabric.Terminology.Client.Builders
 {
     using System;
     using System.Threading.Tasks;
@@ -8,7 +8,7 @@
 
     public class ValueSetSingleRequest : ValueSetRequestBase<Task<Maybe<ValueSet>>>, IApiGetRequest
     {
-        public ValueSetSingleRequest(Lazy<IValueSetApiService> valueSetApiService, string valueSetUniqueId)
+        internal ValueSetSingleRequest(Lazy<IValueSetApiService> valueSetApiService, string valueSetUniqueId)
             : base(valueSetApiService)
         {
             this.ValueSetUniqueId = valueSetUniqueId;

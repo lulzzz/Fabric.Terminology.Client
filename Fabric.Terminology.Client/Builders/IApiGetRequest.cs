@@ -1,4 +1,4 @@
-﻿namespace Fabric.Terminology.Client.Builder
+﻿namespace Fabric.Terminology.Client.Builders
 {
     public interface IApiGetRequest
     {

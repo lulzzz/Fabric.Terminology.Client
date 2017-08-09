@@ -1,11 +1,11 @@
 ﻿namespace Fabric.Terminology.Client
 {
-    using Fabric.Terminology.Client.Builder;
+    using Fabric.Terminology.Client.Builders;
     using Fabric.Terminology.Client.Configuration;
 
-    public class Terminology : ITerminology
+    public class TerminologyContext : ITerminologyContext
     {
-        public Terminology(ITerminologyApiSettings settings)
+        public TerminologyContext(ITerminologyApiSettings settings)
         {
             this.ValueSets = new ValueSetRequest(settings);
         }

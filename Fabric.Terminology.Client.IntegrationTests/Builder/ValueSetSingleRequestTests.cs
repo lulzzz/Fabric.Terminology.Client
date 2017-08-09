@@ -25,7 +25,8 @@
             // Arrange
 
             // Act
-            var query = this.Terminology.ValueSets.WithUniqueId(valueSetUniqueId);
+            var query = this.TerminologyContext.ValueSets.WithUniqueId(valueSetUniqueId).IncludeAllCodes();
+            
 
             var maybe = this.Profiler.ExecuteTimed(async () => await query.Execute());
             maybe.HasValue.Should().BeTrue();

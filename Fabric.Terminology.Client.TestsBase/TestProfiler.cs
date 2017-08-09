@@ -1,10 +1,10 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Xunit.Abstractions;
-
-namespace Fabric.Terminology.Client.TestsBase
+﻿namespace Fabric.Terminology.Client.TestsBase
 {
+    using System;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+    using Xunit.Abstractions;
+
     public class TestProfiler
     {
         public TestProfiler(ITestOutputHelper output)

@@ -2,14 +2,14 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Fabric.Terminology.Client.Builder;
+    using Fabric.Terminology.Client.Builders;
 
     public static partial class Extensions
     {
         public static TRequest IncludeAllCodes<TRequest>(this TRequest request)
             where TRequest : ValueSetRequestBase
         {
-            request.SummaryCodeList = false;
+            request.Summary = false;
             return request;
         }
 
