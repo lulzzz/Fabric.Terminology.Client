@@ -7,11 +7,11 @@
             this.Initialize();
         }
 
-        public ITerminology Terminology { get; private set; }
+        public ITerminologyContext TerminologyContext { get; private set; }
 
         private void Initialize()
         {
-            this.Terminology = new Terminology(this.TerminologyApiSettings);
+            this.TerminologyContext = new TerminologyContext(this.TerminologyApiSettings);
         }
     }
 }

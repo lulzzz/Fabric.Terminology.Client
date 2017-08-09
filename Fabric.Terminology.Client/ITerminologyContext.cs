@@ -1,9 +1,8 @@
 ﻿namespace Fabric.Terminology.Client
 {
     using Fabric.Terminology.Client.Builder;
-    using Fabric.Terminology.Client.Services;
 
-    public interface ITerminology
+    public interface ITerminologyContext
     {
         ValueSetRequest ValueSets { get; }
     }

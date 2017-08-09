@@ -17,7 +17,7 @@
         public void CanGetValueSetPage()
         {
             // Arrange
-            var query = this.Terminology.ValueSets.Paged().IncludeAllCodes();
+            var query = this.TerminologyContext.ValueSets.Paged().IncludeAllCodes();
 
             // Act
             var page = this.Profiler.ExecuteTimed(async () => await query.Execute());
