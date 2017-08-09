@@ -10,7 +10,6 @@
     using Fabric.Terminology.Client.Configuration;
     using Fabric.Terminology.Client.Models;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
 
     internal abstract class ApiServiceBase
     {
