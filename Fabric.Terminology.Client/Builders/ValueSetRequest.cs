@@ -10,7 +10,7 @@
     {
         private Lazy<IValueSetApiService> valueSetApiService;
 
-        public ValueSetRequest(ITerminologyApiSettings settings)
+        internal ValueSetRequest(ITerminologyApiSettings settings)
         {
             this.Initialize(settings);
         }

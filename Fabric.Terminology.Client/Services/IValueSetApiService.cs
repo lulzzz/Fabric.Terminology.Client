@@ -1,10 +1,9 @@
-﻿using Fabric.Terminology.Client.Builders;
-
-namespace Fabric.Terminology.Client.Services
+﻿namespace Fabric.Terminology.Client.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using CallMeMaybe;
+    using Fabric.Terminology.Client.Builders;
     using Fabric.Terminology.Client.Models;
 
     public interface IValueSetApiService

@@ -9,7 +9,7 @@
     {
         private readonly PagerSettings pagerSettings;
 
-        public ValueSetPagedRequest(Lazy<IValueSetApiService> valueSetApiService, PagerSettings pagerSettings)
+        internal ValueSetPagedRequest(Lazy<IValueSetApiService> valueSetApiService, PagerSettings pagerSettings)
             : base(valueSetApiService)
         {
             this.EnsurePagerSettings(pagerSettings);

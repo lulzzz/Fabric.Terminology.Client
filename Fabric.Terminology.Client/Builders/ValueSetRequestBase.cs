@@ -25,6 +25,7 @@ namespace Fabric.Terminology.Client.Builders
         protected ValueSetRequestBase(Lazy<IValueSetApiService> service)
         {
             this.valueSetApiService = service;
+            this.Summary = true;
         }
 
         internal bool Summary { get; set; }

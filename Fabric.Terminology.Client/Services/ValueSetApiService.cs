@@ -33,8 +33,7 @@ namespace Fabric.Terminology.Client.Services
 
         public Task<PagedCollection<ValueSet>> FindValueSetPage(ValueSetSearchRequest request)
         {
-            //return this.PostApiResult<ValueSet>()
-            throw new NotImplementedException();
+            return this.PostApiResultPage<ValueSet, FindByTermQuery>($"{this.BaseUrl}/find", request.BuildModel());
         }
 
         private string BuildHttpGetUrl(IApiGetRequest request)

@@ -98,6 +98,8 @@
             var requestContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
             using (var client = new HttpClient())
             {
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
                 using (var response = await client.PostAsync(url, requestContent))
                 {
                     using (var content = response.Content)

@@ -1,9 +1,8 @@
-﻿using Fabric.Terminology.Client.Builders;
-
-namespace Fabric.Terminology.Client
+﻿namespace Fabric.Terminology.Client
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Fabric.Terminology.Client.Builders;
 
     public static partial class Extensions
     {

@@ -11,7 +11,7 @@
     {
         private readonly IList<string> valueSetUniqueIds = new List<string>();
 
-        public ValueSetListRequest(Lazy<IValueSetApiService> valueSetApiService, IEnumerable<string> valueSetUniqueIds)
+        internal ValueSetListRequest(Lazy<IValueSetApiService> valueSetApiService, IEnumerable<string> valueSetUniqueIds)
             : base(valueSetApiService)
         {
             var setUniqueIds = valueSetUniqueIds as string[] ?? valueSetUniqueIds.ToArray();

@@ -20,7 +20,7 @@
 
         public override Task<PagedCollection<ValueSet>> Execute()
         {
-            throw new NotImplementedException();
+            return this.ValueSetApiService.FindValueSetPage(this);
         }
 
         public FindByTermQuery BuildModel()
