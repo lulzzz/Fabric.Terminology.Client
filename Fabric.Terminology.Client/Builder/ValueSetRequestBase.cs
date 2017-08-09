@@ -1,9 +1,20 @@
-﻿namespace Fabric.Terminology.Client.Builder
+﻿#pragma warning disable SA1402 // File may only contain a single class
+namespace Fabric.Terminology.Client.Builder
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Fabric.Terminology.Client.Services;
+
+    public abstract class ValueSetRequestBase<TResult> : ValueSetRequestBase
+    {
+        protected ValueSetRequestBase(Lazy<IValueSetApiService> service)
+            : base(service)
+        {
+        }
+
+        public abstract TResult Execute();
+    }
 
     public abstract class ValueSetRequestBase
     {
@@ -21,7 +32,6 @@
         internal IEnumerable<string> CodeSystemCodeFilters => this.codeSytemCodes;
 
         protected IValueSetApiService ValueSetApiService => this.valueSetApiService.Value;
-
 
         internal void AddCodeSytemFilter(string codeSystemCode)
         {
@@ -54,3 +64,4 @@
         }
     }
 }
+#pragma warning disable SA1402 // File may only contain a single class

@@ -1,9 +1,10 @@
-﻿namespace Fabric.Terminology.Client.Builder
+﻿namespace Fabric.Terminology.Client
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Fabric.Terminology.Client.Builder;
 
-    public static class ValueSetRequestExtensions
+    public static partial class Extensions
     {
         public static TRequest IncludeAllCodes<TRequest>(this TRequest request)
             where TRequest : ValueSetRequestBase

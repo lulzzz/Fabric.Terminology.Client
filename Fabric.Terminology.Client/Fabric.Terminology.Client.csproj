@@ -4,10 +4,6 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Builder\ValueSetPageRequest.cs" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <PackageReference Include="CallMeMaybe" Version="0.6.3.22-alpha" />
@@ -16,5 +12,9 @@
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="1.1.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Compile Update="Extensions.*.cs">
+      <DependentUpon>Extensions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

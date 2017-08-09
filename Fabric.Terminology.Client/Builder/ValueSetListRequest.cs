@@ -11,7 +11,7 @@
     {
         private readonly IList<string> valueSetUniqueIds = new List<string>();
 
-        internal ValueSetListRequest(Lazy<IValueSetApiService> valueSetApiService, IEnumerable<string> valueSetUniqueIds)
+        public ValueSetListRequest(Lazy<IValueSetApiService> valueSetApiService, IEnumerable<string> valueSetUniqueIds)
             : base(valueSetApiService)
         {
             var setUniqueIds = valueSetUniqueIds as string[] ?? valueSetUniqueIds.ToArray();
@@ -25,7 +25,7 @@
 
         public override Task<IReadOnlyCollection<ValueSet>> Execute()
         {
-            throw new NotImplementedException();
+            return this.ValueSetApiService.GetValueSets(this);
         }
 
         public string GetEndpoint()

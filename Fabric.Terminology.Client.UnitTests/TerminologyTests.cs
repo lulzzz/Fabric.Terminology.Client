@@ -23,7 +23,7 @@
             // handled in fixture
 
             // Act
-            var valueSetApiService = this.terminology.ValueSet;
+            var valueSetApiService = this.terminology.ValueSets;
 
             // Assert
             valueSetApiService.Should().NotBeNull();

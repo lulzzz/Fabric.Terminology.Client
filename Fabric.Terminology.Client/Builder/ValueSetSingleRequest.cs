@@ -8,7 +8,7 @@
 
     public class ValueSetSingleRequest : ValueSetRequestBase<Task<Maybe<ValueSet>>>, IApiGetRequest
     {
-        internal ValueSetSingleRequest(Lazy<IValueSetApiService> valueSetApiService, string valueSetUniqueId)
+        public ValueSetSingleRequest(Lazy<IValueSetApiService> valueSetApiService, string valueSetUniqueId)
             : base(valueSetApiService)
         {
             this.ValueSetUniqueId = valueSetUniqueId;

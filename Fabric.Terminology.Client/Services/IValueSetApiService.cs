@@ -10,6 +10,10 @@
     {
         Task<Maybe<ValueSet>> GetValueSet(ValueSetSingleRequest request);
 
+        Task<IReadOnlyCollection<ValueSet>> GetValueSets(ValueSetListRequest request);
+
+        Task<PagedCollection<ValueSet>> GetValueSetPage(ValueSetPageRequest request);
+
         //Task<Maybe<ValueSet>> GetValueSet(string valueSetUniqueId, IEnumerable<string> codeSystemCodes);
 
         //IReadOnlyCollection<ValueSet> GetValueSets(IEnumerable<string> valueSetUniqueId);
