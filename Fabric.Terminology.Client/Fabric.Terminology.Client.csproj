@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PackageProjectUrl>https://github.com/HealthCatalyst/Fabric.Terminology.Client</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/HealthCatalyst/Fabric.Terminology.Client</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/HealthCatalyst/Fabric.Terminology.Client/blob/develop/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
 
@@ -10,6 +14,7 @@
     <PackageReference Include="JetBrains.Annotations" Version="11.0.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="1.1.0" />
+    <PackageReference Include="semver" Version="2.0.4" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
