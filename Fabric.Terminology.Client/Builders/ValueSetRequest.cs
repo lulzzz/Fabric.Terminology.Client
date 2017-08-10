@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Fabric.Terminology.Client.Configuration;
+    using Fabric.Terminology.Client.Logging;
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
@@ -10,9 +11,9 @@
     {
         private Lazy<IValueSetApiService> valueSetApiService;
 
-        internal ValueSetRequest(ITerminologyApiSettings settings)
+        internal ValueSetRequest(ITerminologyApiSettings settings, ILogger logger)
         {
-            this.Initialize(settings);
+            this.Initialize(settings, logger);
         }
 
         public ValueSetSingleRequest WithUniqueId(string valueSetUniqueId)
@@ -67,9 +68,9 @@
             return new ValueSetSearchRequest(this.valueSetApiService, term, pagerSettings);
         }
 
-        private void Initialize(ITerminologyApiSettings settings)
+        private void Initialize(ITerminologyApiSettings settings, ILogger logger)
         {
-            this.valueSetApiService = new Lazy<IValueSetApiService>(() => new ValueSetApiService(settings));
+            this.valueSetApiService = new Lazy<IValueSetApiService>(() => new ValueSetApiService(settings, logger));
         }
     }
 }

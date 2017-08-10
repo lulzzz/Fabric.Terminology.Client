@@ -1,18 +1,17 @@
-﻿using System;
-
-namespace Fabric.Terminology.Client.Services
+﻿namespace Fabric.Terminology.Client.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using CallMeMaybe;
     using Fabric.Terminology.Client.Builders;
     using Fabric.Terminology.Client.Configuration;
+    using Fabric.Terminology.Client.Logging;
     using Fabric.Terminology.Client.Models;
 
     internal class ValueSetApiService : ApiServiceBase, IValueSetApiService
     {
-        public ValueSetApiService(ITerminologyApiSettings settings)
-            : base(settings, "valuesets")
+        public ValueSetApiService(ITerminologyApiSettings settings, ILogger logger)
+            : base(settings, logger, "valuesets")
         {
         }
 
