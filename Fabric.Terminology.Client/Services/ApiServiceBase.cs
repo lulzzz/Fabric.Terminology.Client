@@ -1,4 +1,6 @@
-﻿namespace Fabric.Terminology.Client.Services
+﻿using Fabric.Terminology.Client.Logging;
+
+namespace Fabric.Terminology.Client.Services
 {
     using System;
     using System.Collections.Generic;
@@ -16,13 +18,16 @@
     {
         private readonly string route;
 
-        protected ApiServiceBase(ITerminologyApiSettings settings, string route)
+        protected ApiServiceBase(ITerminologyApiSettings settings, ILogger logger, string route)
         {
             this.ApiSettings = settings;
+            this.Logger = logger;
             this.route = route;
         }
 
         protected ITerminologyApiSettings ApiSettings { get; }
+
+        protected ILogger Logger { get; }
 
         protected string BaseUrl => $"{this.ApiSettings.TerminologyApiUri}/{this.ApiSettings.ApiVersion}/{this.route}";
 
@@ -78,16 +83,17 @@
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                using (var response = await client.GetAsync(url))
+                try
                 {
-                    using (var content = response.Content)
+                    using (var response = await client.GetAsync(url))
                     {
-                        var json = await content.ReadAsStringAsync();
-                        return json != null
-                            ? Maybe.From(json)
-                            : Maybe<string>.Not;
+                        return await this.GetHttpContent(HttpMethod.Get, url, response);
                     }
+                }
+                catch (Exception ex)
+                {
+                    this.Logger.Error<ApiServiceBase>("Failed HttpGet - Fabric.Terminology.API", ex);
+                    throw;
                 }
             }
         }
@@ -99,18 +105,40 @@
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                using (var response = await client.PostAsync(url, requestContent))
+                try
                 {
-                    using (var content = response.Content)
+                    using (var response = await client.PostAsync(url, requestContent))
                     {
-                        var json = await content.ReadAsStringAsync();
-                        return json != null
-                            ? Maybe.From(json)
-                            : Maybe<string>.Not;
+                        return await this.GetHttpContent(HttpMethod.Post, url, response);
                     }
                 }
+                catch (Exception ex)
+                {
+                    this.Logger.Error<ApiServiceBase>("Failed HttpPost - Fabric.Terminology.API", ex);
+                    throw;
+                }
+            }
+        }
 
+        private async Task<Maybe<string>> GetHttpContent(HttpMethod method, string url, HttpResponseMessage response)
+        {
+            using (var content = response.Content)
+            {
+                var json = await content.ReadAsStringAsync();
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return Maybe.If(json != null, json);
+                }
+
+                var error = ErrorFactory.CreateError<ApiServiceBase>(json, response.StatusCode);
+                this.Logger.Error<ApiServiceBase>(
+                    "{@Method} {@Url} returned status {@StatusCode}",
+                    error,
+                    method,
+                    url,
+                    response.StatusCode.ToString());
+                return Maybe<string>.Not;
             }
         }
     }
