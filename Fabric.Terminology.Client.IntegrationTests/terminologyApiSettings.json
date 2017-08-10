@@ -1,5 +1,10 @@
 ﻿{
-  "TerminologyApiSettings": {
-    "TerminologyApiUri": "[TerminologyApiUrl]" 
+  "TerminologyApiUri": "http://localhost:61762/",
+  "ApiVersion": "v0.4",
+  "ValueSetMeta": {
+    "AuthoringSourceDescription": "API.Client Authoring Source Description",
+    "PurposeDescription": "API.Client Purpose Description",
+    "SourceDescription": "API.Client Source Description",
+    "VersionDescription": "API.Client Version Description" 
   }
 }
