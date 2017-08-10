@@ -1,7 +1,6 @@
-﻿using Fabric.Terminology.Client.Builders;
-
-namespace Fabric.Terminology.Client.UnitTests
+﻿namespace Fabric.Terminology.Client.UnitTests
 {
+    using Fabric.Terminology.Client.Builders;
     using Fabric.Terminology.Client.TestsBase;
     using Fabric.Terminology.Client.TestsBase.Fixtures;
     using FluentAssertions;

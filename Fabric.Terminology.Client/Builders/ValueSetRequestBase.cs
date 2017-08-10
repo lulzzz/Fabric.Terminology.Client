@@ -4,9 +4,10 @@ namespace Fabric.Terminology.Client.Builders
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using Fabric.Terminology.Client.Services;
 
-    public abstract class ValueSetRequestBase<TResult> : ValueSetRequestBase
+    public abstract class ValueSetRequestBase<TResult> : ValueSetRequestBase, IApiRequest<TResult>
     {
         protected ValueSetRequestBase(Lazy<IValueSetApiService> service)
             : base(service)
