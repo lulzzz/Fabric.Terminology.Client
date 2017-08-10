@@ -13,8 +13,8 @@
         {
         }
 
-        //[Theory(Skip = "Manual run only. Delete not implemented.")]
-        [Theory]
+        [Theory(Skip = "Manual run only. Delete not implemented.")]
+        //[Theory]
         [InlineData("Api.ValueSet1", 10)]
         [InlineData("Api.ValueSet2", 5)]
         [InlineData("Api.ValueSet3", 2500)]
