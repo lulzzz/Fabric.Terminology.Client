@@ -86,7 +86,7 @@ gulp.task("version:nugetpowershell",
         if (argv.setVersion === undefined) { return; }
 
         var content =
-            'Param(\n[string]$artifactsDir\n)\n\ndotnet pack .\\Fabric.Terminology.Client\\Fabric.Terminology.Client.csproj --include-symbols /p:PackageVersion=' +
+            'Param(\n[string]$artifactsDir\n)\n\ndotnet pack .\\Fabric.Terminology.Client\\Fabric.Terminology.Client.csproj -c Release --include-symbols /p:PackageVersion=' +
                 version.nugetVersion();         
 
 
