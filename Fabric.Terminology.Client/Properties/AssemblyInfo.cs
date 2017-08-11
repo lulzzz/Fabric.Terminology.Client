@@ -1,11 +1,13 @@
 using System;
 using System.Reflection;
 
-[assembly: AssemblyTitle("Fabric.Terminology")]
-[assembly: AssemblyDescription("Service to provide shared healthcare terminology data")]
+[assembly: CLSCompliant(true)]
+
+[assembly: AssemblyTitle("Fabric.Terminology.Client")]
+[assembly: AssemblyDescription("C# .NET client for the Fabric.Terminology.API.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Health Catalyst")]
-[assembly: AssemblyProduct("Fabric.Terminology")]
+[assembly: AssemblyProduct("Fabric.Terminology.Client")]
 [assembly: AssemblyCopyright("Copyright 2017 © Health Catalyst")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
