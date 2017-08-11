@@ -14,6 +14,13 @@ var version = new function () {
     // do not assign. 
     this.build = argv.buildNumber === undefined ? -1 : argv.buildNumber;
     this.compose = function () { return this.major + "." + this.minor + "." + this.patch + "." + this.build }
+    this.nugetVersion = function () {
+        var packageVersion = this.major + "." + this.minor + "." + this.patch;
+        if (this.releaseComment !== '') { packageVersion += "-" + this.releaseComment; }
+        if (this.releaseComment === '' && this.build !== -1 && this.build !== 0) { packageVersion += '.'; }
+        if (this.build !== -1 && this.build !== 0) { packageVersion += this.build; }
+        return packageVersion;
+    }
 };
 
 /*************************************************************
@@ -72,4 +79,10 @@ gulp.task("version:comment",
         gulp.src("../Fabric.Terminology.API/Configuration/TerminologyVersion.cs")
             .pipe(replace(/CurrentComment *(=>) *(.+)/g, "CurrentComment => \"" + version.releaseComment + "\";"))
             .pipe(gulp.dest("../Fabric.Terminology.API/Configuration/"));
+    });
+
+gulp.task("version:nugetpowershell",
+    () => {
+        if (argv.setVersion === undefined) { return; }
+        fs.writeFile('nugetPack.ps1', 'dotnet pack .\\Fabric.Terminology.Client\\Fabric.Terminology.Client.csproj --include-symbols /p:PackageVersion=' + version.nugetVersion());
     });
