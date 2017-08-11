@@ -68,6 +68,11 @@
             return new ValueSetSearchRequest(this.valueSetApiService, term, pagerSettings);
         }
 
+        public ValueSetAddRequest Add(string name, IEnumerable<CodeSetCode> codes)
+        {
+            return new ValueSetAddRequest(this.valueSetApiService, name, codes);
+        }
+
         private void Initialize(ITerminologyApiSettings settings, ILogger logger)
         {
             this.valueSetApiService = new Lazy<IValueSetApiService>(() => new ValueSetApiService(settings, logger));

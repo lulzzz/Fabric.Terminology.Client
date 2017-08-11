@@ -15,5 +15,7 @@
         Task<PagedCollection<ValueSet>> GetValueSetPage(ValueSetPagedRequest request);
 
         Task<PagedCollection<ValueSet>> FindValueSetPage(ValueSetSearchRequest request);
+
+        Task<Maybe<ValueSet>> AddValueSet(ValueSetAddRequest request);
     }
 }

@@ -35,6 +35,12 @@
             return this.PostApiResultPage<ValueSet, FindByTermQuery>($"{this.BaseUrl}/find", request.BuildModel());
         }
 
+        public Task<Maybe<ValueSet>> AddValueSet(ValueSetAddRequest request)
+        {
+            var model = request.BuildModel(this.ApiSettings.ValueSetMeta);
+            return this.PostApiResult<ValueSet, ValueSetCreation>(this.BaseUrl, model);
+        }
+
         private string BuildHttpGetUrl(IApiGetRequest request)
         {
             return $"{this.BaseUrl}/{request.GetEndpoint()}";
