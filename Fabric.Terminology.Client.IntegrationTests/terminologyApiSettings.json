@@ -1,5 +1,5 @@
 ﻿{
-  "TerminologyApiUri": "http://localhost:61762/",
+  "TerminologyApiUri": "http://term.local",
   "ApiVersion": "v0.4",
   "ValueSetMeta": {
     "AuthoringSourceDescription": "API.Client Authoring Source Description",

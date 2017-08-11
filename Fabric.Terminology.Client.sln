@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fabric.Terminology.Client", "Fabric.Terminology.Client\Fabric.Terminology.Client.csproj", "{C9BB83C2-47CB-4AED-A57A-F88E0C9B5249}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A40FCC7F-32BE-4C8F-B48E-F63EB15F46C5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fabric.Terminology.Client.UnitTests", "Fabric.Terminology.Client.UnitTests\Fabric.Terminology.Client.UnitTests.csproj", "{9C0ED317-AAD1-4245-AC4E-04E9C25DE876}"
@@ -19,16 +17,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{1647527C
 		Tools\package.json = Tools\package.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabric.Terminology.Client.462", "Fabric.Terminology.Client.462\Fabric.Terminology.Client.462.csproj", "{72A50502-8A69-4E50-8730-CF3E689933A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabric.Terminology.Client", "Fabric.Terminology.Client\Fabric.Terminology.Client.csproj", "{150C53CC-1A0E-4A2B-AB7E-9943173EB7DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C9BB83C2-47CB-4AED-A57A-F88E0C9B5249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9BB83C2-47CB-4AED-A57A-F88E0C9B5249}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9BB83C2-47CB-4AED-A57A-F88E0C9B5249}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9BB83C2-47CB-4AED-A57A-F88E0C9B5249}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9C0ED317-AAD1-4245-AC4E-04E9C25DE876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9C0ED317-AAD1-4245-AC4E-04E9C25DE876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C0ED317-AAD1-4245-AC4E-04E9C25DE876}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,6 +39,14 @@ Global
 		{CFAB1445-49DF-4916-A11C-8B3D2716262F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFAB1445-49DF-4916-A11C-8B3D2716262F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFAB1445-49DF-4916-A11C-8B3D2716262F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72A50502-8A69-4E50-8730-CF3E689933A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72A50502-8A69-4E50-8730-CF3E689933A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72A50502-8A69-4E50-8730-CF3E689933A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72A50502-8A69-4E50-8730-CF3E689933A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{150C53CC-1A0E-4A2B-AB7E-9943173EB7DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{150C53CC-1A0E-4A2B-AB7E-9943173EB7DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{150C53CC-1A0E-4A2B-AB7E-9943173EB7DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{150C53CC-1A0E-4A2B-AB7E-9943173EB7DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
