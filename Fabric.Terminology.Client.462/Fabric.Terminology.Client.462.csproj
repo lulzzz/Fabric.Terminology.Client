@@ -7,8 +7,8 @@
     <ProjectGuid>{72A50502-8A69-4E50-8730-CF3E689933A7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fabric.Terminology.Client._462</RootNamespace>
-    <AssemblyName>Fabric.Terminology.Client.462</AssemblyName>
+    <RootNamespace>Fabric.Terminology.Client</RootNamespace>
+    <AssemblyName>Fabric.Terminology.Client</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
