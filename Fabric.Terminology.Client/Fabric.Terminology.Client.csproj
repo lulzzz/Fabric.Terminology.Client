@@ -7,7 +7,7 @@
     <RepositoryUrl>https://github.com/HealthCatalyst/Fabric.Terminology.Client</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/HealthCatalyst/Fabric.Terminology.Client/blob/develop/LICENSE</PackageLicenseUrl>
     <Description>.NET Client for the Fabric.Terminology API.</Description>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
 
