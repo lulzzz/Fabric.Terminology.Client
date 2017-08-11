@@ -29,7 +29,7 @@ var version = new function () {
  * e.g.  gulp prod --setVersion
  *       gulp prod --setVersion --buildNumber=[BUILD_NUMBER from VS BUILD]
  *************************************************************/
-gulp.task("version", ["version:comment"], () => {
+gulp.task("version", ["version:nugetpowershell", "version:comment"], () => {
     if (argv.setVersion === undefined) { return; }
 
     saveInfo(getInfo("../Fabric.Terminology.Client/properties/"));
