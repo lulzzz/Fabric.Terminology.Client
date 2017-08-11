@@ -14,6 +14,13 @@ var version = new function () {
     // do not assign. 
     this.build = argv.buildNumber === undefined ? -1 : argv.buildNumber;
     this.compose = function () { return this.major + "." + this.minor + "." + this.patch + "." + this.build }
+    this.nugetVersion = function () {
+        var packageVersion = this.major + "." + this.minor + "." + this.patch;
+        if (this.releaseComment !== '') { packageVersion += "-" + this.releaseComment; }
+        if (this.releaseComment === '' && this.build !== -1 && this.build !== 0) { packageVersion += '.'; }
+        if (this.build !== -1 && this.build !== 0) { packageVersion += this.build; }
+        return packageVersion;
+    }
 };
 
 /*************************************************************
@@ -22,7 +29,7 @@ var version = new function () {
  * e.g.  gulp prod --setVersion
  *       gulp prod --setVersion --buildNumber=[BUILD_NUMBER from VS BUILD]
  *************************************************************/
-gulp.task("version", ["version:comment"], () => {
+gulp.task("version", ["version:nugetpowershell", "version:comment"], () => {
     if (argv.setVersion === undefined) { return; }
 
     saveInfo(getInfo("../Fabric.Terminology.Client/properties/"));
@@ -72,4 +79,16 @@ gulp.task("version:comment",
         gulp.src("../Fabric.Terminology.API/Configuration/TerminologyVersion.cs")
             .pipe(replace(/CurrentComment *(=>) *(.+)/g, "CurrentComment => \"" + version.releaseComment + "\";"))
             .pipe(gulp.dest("../Fabric.Terminology.API/Configuration/"));
+    });
+
+gulp.task("version:nugetpowershell",
+    () => {
+        if (argv.setVersion === undefined) { return; }
+
+        var content =
+            'Param(\n[string]$artifactsDir\n)\n\ndotnet pack ..\\Fabric.Terminology.Client\\Fabric.Terminology.Client.csproj --include-symbols /p:PackageVersion=' +
+                version.nugetVersion();         
+
+
+        fs.writeFile('nugetPack.ps1', content);
     });
