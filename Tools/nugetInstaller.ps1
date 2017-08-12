@@ -3,4 +3,4 @@ $targetNugetExe = ".\nuget.exe"
 Invoke-WebRequest $sourceNugetExe -OutFile $targetNugetExe
 Set-Alias nuget $targetNugetExe -Scope Global -Verbose
 
-.\nuget.exe pack .\Fabric.Terminology.Client.nuspec -OutputDirectory ..\artifacts
+.\nuget.exe pack .\Tools\Fabric.Terminology.Client.nuspec -OutputDirectory ..\artifacts
