@@ -1,1 +1,1 @@
-.\nuget.exe pack .\Tools\Fabric.Terminology.Client.nuspec -OutputDirectory ..\artifacts
+.\nuget.exe pack .\Tools\Fabric.Terminology.Client.nuspec -OutputDirectory artifacts
