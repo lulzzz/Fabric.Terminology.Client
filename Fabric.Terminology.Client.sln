@@ -15,7 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{1647527C
 	ProjectSection(SolutionItems) = preProject
 		Tools\Fabric.Terminology.Client.nuspec = Tools\Fabric.Terminology.Client.nuspec
 		Tools\gulpfile.js = Tools\gulpfile.js
+		Tools\nugetInstaller.ps1 = Tools\nugetInstaller.ps1
 		Tools\package.json = Tools\package.json
+		restore462packages.ps1 = restore462packages.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabric.Terminology.Client.462", "Fabric.Terminology.Client.462\Fabric.Terminology.Client.462.csproj", "{72A50502-8A69-4E50-8730-CF3E689933A7}"
