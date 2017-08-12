@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netstandard1.4</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PackageProjectUrl>https://github.com/HealthCatalyst/Fabric.Terminology.Client</PackageProjectUrl>
     <RepositoryUrl>https://github.com/HealthCatalyst/Fabric.Terminology.Client</RepositoryUrl>
@@ -10,12 +10,50 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
-
+  <ItemGroup>
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\IApiGetRequest.cs" Link="Builders\IApiGetRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\IApiPostRequest.cs" Link="Builders\IApiPostRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\IApiRequest.cs" Link="Builders\IApiRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetAddRequest.cs" Link="Builders\ValueSetAddRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetListRequest.cs" Link="Builders\ValueSetListRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetPagedRequest.cs" Link="Builders\ValueSetPagedRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetPagedRequestBase.cs" Link="Builders\ValueSetPagedRequestBase.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetRequest.cs" Link="Builders\ValueSetRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetRequestBase.cs" Link="Builders\ValueSetRequestBase.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetSearchRequest.cs" Link="Builders\ValueSetSearchRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetSingleRequest.cs" Link="Builders\ValueSetSingleRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Configuration\ITerminologyApiSettings.cs" Link="Configuration\ITerminologyApiSettings.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Configuration\TerminologyApiSettings.cs" Link="Configuration\TerminologyApiSettings.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Configuration\TerminologyClientVersion.cs" Link="Configuration\TerminologyClientVersion.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Extensions.cs" Link="Extensions.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Extensions.Logger.cs" Link="Extensions.Logger.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Extensions.String.cs" Link="Extensions.String.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Extensions.ValueSetRequest.cs" Link="Extensions.ValueSetRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\ITerminologyContext.cs" Link="ITerminologyContext.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Logging\ILogger.cs" Link="Logging\ILogger.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Logging\LogFactory.cs" Link="Logging\LogFactory.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Logging\SerilogAdapter.cs" Link="Logging\SerilogAdapter.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Models\CodeSetCode.cs" Link="Models\CodeSetCode.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Models\CodeSystem.cs" Link="Models\CodeSystem.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Models\ErrorFactory.cs" Link="Models\ErrorFactory.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Models\FindByTermQuery.cs" Link="Models\FindByTermQuery.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Models\PagedCollection{T}.cs" Link="Models\PagedCollection{T}.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Models\PagerSettings.cs" Link="Models\PagerSettings.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Models\TerminologyApiError.cs" Link="Models\TerminologyApiError.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Models\ValueSet.cs" Link="Models\ValueSet.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Models\ValueSetCode.cs" Link="Models\ValueSetCode.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Models\ValueSetCreation.cs" Link="Models\ValueSetCreation.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Models\ValueSetMeta.cs" Link="Models\ValueSetMeta.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Services\ApiServiceBase.cs" Link="Services\ApiServiceBase.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Services\IValueSetApiService.cs" Link="Services\IValueSetApiService.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Services\ValueSetApiService.cs" Link="Services\ValueSetApiService.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\TerminologyContext.cs" Link="TerminologyContext.cs" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CallMeMaybe" Version="0.6.3.22-alpha" />
     <PackageReference Include="JetBrains.Annotations" Version="11.0.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="1.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="semver" Version="2.0.4" />
     <PackageReference Include="serilog" Version="2.5.0" />
     <PackageReference Include="serilog.sinks.literate" Version="3.0.0" />
@@ -26,5 +64,12 @@
     <Compile Update="Extensions.*.cs">
       <DependentUpon>Extensions.cs</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Builders\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Logging\" />
+    <Folder Include="Models\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>

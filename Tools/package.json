@@ -12,6 +12,7 @@
     "gulp": "^3.9.1",
     "gulp-dotnet-assembly-info": "^0.1.12",
     "gulp-replace": "^0.6.1",
+    "gulp-xmlpoke": "^0.2.1",
     "yargs": "^8.0.2"
   }
 }
