@@ -22,6 +22,9 @@
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetRequestBase.cs" Link="Builders\ValueSetRequestBase.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetSearchRequest.cs" Link="Builders\ValueSetSearchRequest.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetSingleRequest.cs" Link="Builders\ValueSetSingleRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Configuration\ITerminologyApiSettings.cs" Link="Configuration\ITerminologyApiSettings.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Configuration\TerminologyApiSettings.cs" Link="Configuration\TerminologyApiSettings.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Configuration\TerminologyClientVersion.cs" Link="Configuration\TerminologyClientVersion.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Extensions.cs" Link="Extensions.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Extensions.Logger.cs" Link="Extensions.Logger.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Extensions.String.cs" Link="Extensions.String.cs" />
@@ -64,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Builders\" />
+    <Folder Include="Configuration\" />
     <Folder Include="Logging\" />
     <Folder Include="Models\" />
     <Folder Include="Services\" />

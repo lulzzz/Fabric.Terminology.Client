@@ -1,6 +1,7 @@
 var gulp = require("gulp");
 var replace = require('gulp-replace');
 var fs = require('fs');
+var xmlpoke = require('gulp-xmlpoke');
 var assemblyInfo = require('gulp-dotnet-assembly-info');
 var argv = require('yargs').argv;
 
@@ -29,10 +30,11 @@ var version = new function () {
  * e.g.  gulp prod --setVersion
  *       gulp prod --setVersion --buildNumber=[BUILD_NUMBER from VS BUILD]
  *************************************************************/
-gulp.task("version", ["version:nugetpowershell", "version:comment"], () => {
+gulp.task("version", ["version:nuspec", "version:comment"], () => {
     if (argv.setVersion === undefined) { return; }
 
     saveInfo(getInfo("../Fabric.Terminology.Client/properties/"));
+    saveInfo(getInfo("../Fabric.Terminology.Client.462/properties/"));
 
     function getInfo(infoFilePath) {
         var infoFile = infoFilePath + "AssemblyInfo.cs";
@@ -81,11 +83,16 @@ gulp.task("version:comment",
             .pipe(gulp.dest("../Fabric.Terminology.API/Configuration/"));
     });
 
-gulp.task("version:nugetpowershell",
+gulp.task("version:nuspec",
     () => {
-        if (argv.setVersion === undefined) { return; }
-        var content =
-            'Param(\n[string]$artifactsDir\n)\n\necho $artifactsDir\n\ndotnet pack .\\Fabric.Terminology.Client\\Fabric.Terminology.Client.csproj -c Release -o $artifactsDir --include-symbols /p:PackageVersion=' +
-                version.nugetVersion();         
-        fs.writeFile('nugetPack.ps1', content);
+        console.info('Updating NuSpec Version to: ' +  version.nugetVersion());
+        gulp.src('Fabric.Terminology.Client.nuspec')
+            .pipe(xmlpoke({
+                replacements: [{
+                    xpath: "//nuspec:package/nuspec:metadata/nuspec:version"
+                    , namespaces: { "nuspec": "http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd" }
+                    , value: version.nugetVersion()
+                }]
+            }))
+            .pipe(gulp.dest('.'));
     });

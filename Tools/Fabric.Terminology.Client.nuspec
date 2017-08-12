@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Fabric.Terminology.Client</id>
+    <version>0.4.1-alpha</version>
+    <authors>Fabric.Terminology.Client</authors>
+    <owners>Fabric.Terminology.Client</owners>
+    <licenseUrl>https://github.com/HealthCatalyst/Fabric.Terminology.Client/blob/develop/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/HealthCatalyst/Fabric.Terminology.Client</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>.NET Client for the Fabric.Terminology API.</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp1.1">
+        <dependency id="Microsoft.NETCore.App" version="1.1.2" exclude="Build,Analyzers"/>
+        <dependency id="CallMeMaybe" version="0.6.3.22-alpha" exclude="Build,Analyzers"/>
+        <dependency id="JetBrains.Annotations" version="11.0.0" exclude="Build,Analyzers"/>
+        <dependency id="Microsoft.ApplicationInsights.AspNetCore" version="2.1.1" exclude="Build,Analyzers"/>
+        <dependency id="Microsoft.CodeAnalysis.FxCopAnalyzers" version="1.1.0" exclude="Build,Analyzers"/>
+        <dependency id="semver" version="2.0.4" exclude="Build,Analyzers"/>
+        <dependency id="serilog" version="2.5.0" exclude="Build,Analyzers"/>
+        <dependency id="serilog.sinks.literate" version="3.0.0" exclude="Build,Analyzers"/>
+        <dependency id="serilog.sinks.rollingfile" version="3.3.0" exclude="Build,Analyzers"/>
+        <dependency id="StyleCop.Analyzers" version="1.0.2" exclude="Build,Analyzers"/>
+      </group>
+      <group targetFramework="net462">
+        <dependency id="CallMeMaybe" version="0.6.3.22-alpha" exclude="Build, Analyzers"/>
+        <dependency id="Newtonsoft.Json" version="8.0.3" exclude="Build, Analyzers"/>
+        <dependency id="Semver" version="2.0.4" exclude="Build, Analyzers"/>
+        <dependency id="semver" version="2.0.4" exclude="Build,Analyzers"/>
+        <dependency id="serilog" version="2.5.0" exclude="Build,Analyzers"/>
+        <dependency id="serilog.sinks.literate" version="3.0.0" exclude="Build,Analyzers"/>
+        <dependency id="serilog.sinks.rollingfile" version="3.3.0" exclude="Build,Analyzers"/>
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\Fabric.Terminology.Client\bin\Release\netstandard1.4\Fabric.Terminology.Client.dll" target="lib\netcoreapp1.1\Fabric.Terminology.Client.dll"/>
+    <file src="..\Fabric.Terminology.Client\bin\Release\netstandard1.4\Fabric.Terminology.Client.pdb" target="lib\netcoreapp1.1\Fabric.Terminology.Client.pdb"/>
+    <file src="..\Fabric.Terminology.Client.462\bin\Release\Fabric.Terminology.Client.dll" target="lib\net462\Fabric.Terminology.Client.dll"/>
+    <file src="..\Fabric.Terminology.Client.462\bin\Release\Fabric.Terminology.Client.pdb" target="lib\net462\Fabric.Terminology.Client.pdb"/>
+  </files>
+</package>
