@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{1647527C
 		Tools\gulpfile.js = Tools\gulpfile.js
 		Tools\nugetInstaller.ps1 = Tools\nugetInstaller.ps1
 		Tools\package.json = Tools\package.json
+		Tools\packNuspec.ps1 = Tools\packNuspec.ps1
 		restore462packages.ps1 = restore462packages.ps1
 	EndProjectSection
 EndProject
