@@ -4,10 +4,10 @@
 
     public interface ITerminologyApiSettings
     {
-        string TerminologyApiUri { get; set; }
+        string TerminologyApiUri { get; }
 
-        string ApiVersion { get; set; }
+        string ApiVersion { get; }
 
-        ValueSetMeta ValueSetMeta { get; set; }
+        ValueSetMeta ValueSetMeta { get; }
     }
 }
