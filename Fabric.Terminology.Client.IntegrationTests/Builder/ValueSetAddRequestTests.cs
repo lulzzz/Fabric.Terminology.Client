@@ -33,7 +33,6 @@
 
             valueSet.IsCustom.Should().BeTrue();
             valueSet.ValueSetCodesCount.Should().Be(codeCount);
-
         }
     }
 }

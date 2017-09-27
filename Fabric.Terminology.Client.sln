@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A40FCC7F-32BE-4C8F-B48E-F63EB15F46C5}"
 EndProject
@@ -24,6 +24,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabric.Terminology.Client.462", "Fabric.Terminology.Client.462\Fabric.Terminology.Client.462.csproj", "{72A50502-8A69-4E50-8730-CF3E689933A7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fabric.Terminology.Client", "Fabric.Terminology.Client\Fabric.Terminology.Client.csproj", "{150C53CC-1A0E-4A2B-AB7E-9943173EB7DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{1C28B8B6-1C85-44ED-9C51-A04671828C7C}"
+	ProjectSection(SolutionItems) = preProject
+		Catalyst.MinimumRecommendedRules.ruleset = Catalyst.MinimumRecommendedRules.ruleset
+		Catalyst.MostRules.Error.ruleset = Catalyst.MostRules.Error.ruleset
+		Catalyst.TestRules.ruleset = Catalyst.TestRules.ruleset
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,5 +66,8 @@ Global
 		{9C0ED317-AAD1-4245-AC4E-04E9C25DE876} = {A40FCC7F-32BE-4C8F-B48E-F63EB15F46C5}
 		{EEDA9BD3-72EB-4FC5-AA36-CEC56ECF56CB} = {A40FCC7F-32BE-4C8F-B48E-F63EB15F46C5}
 		{CFAB1445-49DF-4916-A11C-8B3D2716262F} = {A40FCC7F-32BE-4C8F-B48E-F63EB15F46C5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5CB66D23-5AC6-4A57-97A6-99454B8939A5}
 	EndGlobalSection
 EndGlobal

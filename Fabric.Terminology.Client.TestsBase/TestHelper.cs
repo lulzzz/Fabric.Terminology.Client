@@ -1,9 +1,8 @@
-﻿using Moq;
-
-namespace Fabric.Terminology.Client.TestsBase
+﻿namespace Fabric.Terminology.Client.TestsBase
 {
     using System.IO;
     using Fabric.Terminology.Client.Configuration;
+    using Moq;
     using Newtonsoft.Json;
 
     public static class TestHelper

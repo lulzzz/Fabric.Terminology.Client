@@ -1,7 +1,7 @@
 ﻿namespace Fabric.Terminology.Client
 {
     /// <summary>
-    /// Extension methods for 
+    /// Extension methods for
     ///     <see>
     ///         <cref>System.String</cref>
     ///     </see>

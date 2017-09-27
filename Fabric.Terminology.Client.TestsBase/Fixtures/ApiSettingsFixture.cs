@@ -12,7 +12,6 @@
 
         public ITerminologyApiSettings TerminologyApiSettings { get; }
 
-
         public virtual void Dispose()
         {
         }

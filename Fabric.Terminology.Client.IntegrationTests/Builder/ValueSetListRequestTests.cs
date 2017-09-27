@@ -8,7 +8,7 @@
 
     public class ValueSetListRequestTests : ValueSetRequestTestBase
     {
-        public ValueSetListRequestTests(ITestOutputHelper output, TerminologyFixture fixture) 
+        public ValueSetListRequestTests(ITestOutputHelper output, TerminologyFixture fixture)
             : base(output, fixture)
         {
         }

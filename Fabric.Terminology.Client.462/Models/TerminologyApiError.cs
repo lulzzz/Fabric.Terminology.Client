@@ -1,8 +1,7 @@
-﻿using System;
-using System.Security.Cryptography;
-
-namespace Fabric.Terminology.Client.Models
+﻿namespace Fabric.Terminology.Client.Models
 {
+    using System;
+
     // acquired from Fabric.Authorization.Domain
     public class TerminologyApiError : Exception
     {

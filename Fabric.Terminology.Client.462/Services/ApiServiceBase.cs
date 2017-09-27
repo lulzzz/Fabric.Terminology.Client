@@ -1,6 +1,4 @@
-﻿using Fabric.Terminology.Client.Logging;
-
-namespace Fabric.Terminology.Client.Services
+﻿namespace Fabric.Terminology.Client.Services
 {
     using System;
     using System.Collections.Generic;
@@ -11,6 +9,7 @@ namespace Fabric.Terminology.Client.Services
     using System.Threading.Tasks;
     using CallMeMaybe;
     using Fabric.Terminology.Client.Configuration;
+    using Fabric.Terminology.Client.Logging;
     using Fabric.Terminology.Client.Models;
     using Newtonsoft.Json;
 

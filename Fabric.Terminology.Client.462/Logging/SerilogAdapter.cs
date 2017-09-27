@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Fabric.Terminology.Client.Logging
+﻿namespace Fabric.Terminology.Client.Logging
 {
     using System;
 

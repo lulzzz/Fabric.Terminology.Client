@@ -1,18 +1,17 @@
-﻿using System.Linq;
-using Fabric.Terminology.Client.Models;
-using FluentAssertions;
-using Xunit;
-
-namespace Fabric.Terminology.Client.IntegrationTests.Builder
+﻿namespace Fabric.Terminology.Client.IntegrationTests.Builder
 {
+    using System.Linq;
+    using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.TestsBase.Fixtures;
+    using FluentAssertions;
+    using Xunit;
     using Xunit.Abstractions;
 
     public class ValueSetSearchRequestTests : ValueSetRequestTestBase
     {
         private readonly ITerminologyContext terminology;
 
-        public ValueSetSearchRequestTests(ITestOutputHelper output, TerminologyFixture fixture) 
+        public ValueSetSearchRequestTests(ITestOutputHelper output, TerminologyFixture fixture)
             : base(output, fixture)
         {
             this.terminology = fixture.TerminologyContext;
@@ -75,7 +74,6 @@ namespace Fabric.Terminology.Client.IntegrationTests.Builder
             page.Values.Any(vs => vs.AllCodesLoaded).Should().BeTrue("All codes included flag was set");
             page.PagerSettings.CurrentPage.Should().Be(currentPage, $"queried for page {currentPage}");
         }
-
 
         [Theory]
         [InlineData("cancer")]

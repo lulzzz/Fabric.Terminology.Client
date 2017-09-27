@@ -38,7 +38,7 @@
 
             // Act
             var single = this.terminology.ValueSets.WithUniqueId("somestring");
-            var list = this.terminology.ValueSets.WithUniqueIdsIn(new[] {"one", "two"});
+            var list = this.terminology.ValueSets.WithUniqueIdsIn(new[] { "one", "two" });
             var page = this.terminology.ValueSets.Paged();
             var search = this.terminology.ValueSets.Search("term");
 
