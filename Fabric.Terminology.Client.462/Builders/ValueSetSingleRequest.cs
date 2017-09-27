@@ -6,22 +6,22 @@
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetSingleRequest : ValueSetRequestBase<Task<Maybe<ValueSet>>>, IApiGetRequest
+    public class ValueSetSingleRequest : ValueSetRequestBase, IApiRequest<Task<Maybe<ValueSet>>>
     {
-        internal ValueSetSingleRequest(Lazy<IValueSetApiService> valueSetApiService, string valueSetUniqueId)
+        internal ValueSetSingleRequest(Lazy<IValueSetApiService> valueSetApiService, Guid valueSetGuid)
             : base(valueSetApiService)
         {
-            this.ValueSetUniqueId = valueSetUniqueId;
+            this.ValueSetGuid = valueSetGuid;
         }
 
-        internal string ValueSetUniqueId { get; }
+        internal Guid ValueSetGuid { get; }
 
         public string GetEndpoint()
         {
-            return $"{this.ValueSetUniqueId}{this.BuildQueryString()}";
+            return $"{this.ValueSetGuid}{this.BuildQueryString()}";
         }
 
-        public override Task<Maybe<ValueSet>> Execute()
+        public Task<Maybe<ValueSet>> Execute()
         {
             return this.ValueSetApiService.GetValueSet(this);
         }

@@ -7,19 +7,9 @@ namespace Fabric.Terminology.Client.Builders
     using System.Threading.Tasks;
     using Fabric.Terminology.Client.Services;
 
-    public abstract class ValueSetRequestBase<TResult> : ValueSetRequestBase, IApiRequest<TResult>
-    {
-        protected ValueSetRequestBase(Lazy<IValueSetApiService> service)
-            : base(service)
-        {
-        }
-
-        public abstract TResult Execute();
-    }
-
     public abstract class ValueSetRequestBase
     {
-        private readonly IList<string> codeSytemCodes = new List<string>();
+        private readonly IList<Guid> codeSytemGuids = new List<Guid>();
 
         private readonly Lazy<IValueSetApiService> valueSetApiService;
 
@@ -31,13 +21,13 @@ namespace Fabric.Terminology.Client.Builders
 
         internal bool Summary { get; set; }
 
-        internal IEnumerable<string> CodeSystemCodeFilters => this.codeSytemCodes;
+        internal IEnumerable<Guid> CodeSystemGuidFilters => this.codeSytemGuids;
 
         protected IValueSetApiService ValueSetApiService => this.valueSetApiService.Value;
 
-        internal void AddCodeSytemFilter(string codeSystemCode)
+        internal void AddCodeSytemFilter(Guid codeSystemGuid)
         {
-            this.codeSytemCodes.Add(codeSystemCode);
+            this.codeSytemGuids.Add(codeSystemGuid);
         }
 
         internal string BuildQueryString()
@@ -49,17 +39,16 @@ namespace Fabric.Terminology.Client.Builders
                 qs += $"$summary=true";
             }
 
-            if (this.CodeSystemCodeFilters.Any())
+            if (this.CodeSystemGuidFilters.Any())
             {
-                foreach (var code in this.CodeSystemCodeFilters)
-                {
-                    if (qs.Length > 0)
-                    {
-                        qs += "&";
-                    }
+                var guidlist = string.Join(",", this.CodeSystemGuidFilters);
 
-                    qs += $"codesystems={code}";
+                if (qs.Length > 0)
+                {
+                    qs += "&";
                 }
+
+                qs += $"$codesystems={guidlist}";
             }
 
             return qs.Length == 0 ? string.Empty : $"?{qs}";

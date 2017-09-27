@@ -13,68 +13,54 @@
     using Fabric.Terminology.Client.Models;
     using Newtonsoft.Json;
 
-    internal abstract class ApiServiceBase
+    internal class ApiTransactionManager : IApiTransactionManager
     {
-        private readonly string route;
+        private readonly ITerminologyApiSettings apiSettings;
 
-        protected ApiServiceBase(ITerminologyApiSettings settings, ILogger logger, string route)
+        private readonly ILogger logger;
+
+        public ApiTransactionManager(ITerminologyApiSettings settings, ILogger logger)
         {
-            this.ApiSettings = settings;
-            this.Logger = logger;
-            this.route = route;
+            this.apiSettings = settings;
+            this.logger = logger;
         }
 
-        protected ITerminologyApiSettings ApiSettings { get; }
+        public string GetBaseUrl(string endPoint) => $"{this.apiSettings.TerminologyApiUri}/{this.apiSettings.ApiVersion}/{endPoint}";
 
-        protected ILogger Logger { get; }
-
-        protected string BaseUrl => $"{this.ApiSettings.TerminologyApiUri}/{this.ApiSettings.ApiVersion}/{this.route}";
-
-        protected async Task<Maybe<TResult>> GetApiResult<TResult>(string url)
+        public async Task<Maybe<TResult>> GetApiResult<TResult>(string url)
         {
-            var json = await this.GetApiJson(url);
-
-            return json.HasValue
-                ? Maybe.From(JsonConvert.DeserializeObject<TResult>(json.Single()))
-                : Maybe<TResult>.Not;
+            return (await this.GetApiJson(url)).Select(JsonConvert.DeserializeObject<TResult>);
         }
 
-        protected async Task<Maybe<TResult>> PostApiResult<TResult, TModel>(string url, TModel model)
+        public async Task<Maybe<TResult>> PostApiResult<TResult, TModel>(string url, TModel model)
             where TModel : class
         {
-            var json = await this.PostApiResult(url, model);
-            return json.HasValue
-                ? Maybe.From(JsonConvert.DeserializeObject<TResult>(json.Single()))
-                : Maybe<TResult>.Not;
+            return (await this.PostApiResult(url, model))
+                        .Select(JsonConvert.DeserializeObject<TResult>);
         }
 
-        protected async Task<IReadOnlyCollection<TResult>> GetApiResultList<TResult>(string url)
+        public async Task<IReadOnlyCollection<TResult>> GetApiResultList<TResult>(string url)
         {
-            var json = await this.GetApiJson(url);
-
-            var result = json.HasValue
-                ? JsonConvert.DeserializeObject<IEnumerable<TResult>>(json.Single())
-                : Enumerable.Empty<TResult>();
+            var result = (await this.GetApiJson(url))
+                .Select(JsonConvert.DeserializeObject<IEnumerable<TResult>>)
+                .Else(Enumerable.Empty<TResult>());
 
             return result.ToArray();
         }
 
-        protected async Task<PagedCollection<TResult>> GetApiResultPage<TResult>(string url)
+        public async Task<PagedCollection<TResult>> GetApiResultPage<TResult>(string url)
         {
-            var json = await this.GetApiJson(url);
-
-            return json.HasValue
-                ? JsonConvert.DeserializeObject<PagedCollection<TResult>>(json.Single())
-                : PagedCollection<TResult>.Empty();
+            return (await this.GetApiJson(url))
+                    .Select(JsonConvert.DeserializeObject<PagedCollection<TResult>>)
+                    .Else(PagedCollection<TResult>.Empty);
         }
 
-        protected async Task<PagedCollection<TResult>> PostApiResultPage<TResult, TModel>(string url, TModel model)
+        public async Task<PagedCollection<TResult>> PostApiResultPage<TResult, TModel>(string url, TModel model)
             where TModel : class
         {
-            var json = await this.PostApiResult(url, model);
-            return json.HasValue
-                ? JsonConvert.DeserializeObject<PagedCollection<TResult>>(json.Single())
-                : PagedCollection<TResult>.Empty();
+            return (await this.PostApiResult(url, model))
+                    .Select(JsonConvert.DeserializeObject<PagedCollection<TResult>>)
+                    .Else(PagedCollection<TResult>.Empty);
         }
 
         private async Task<Maybe<string>> GetApiJson(string url)
@@ -91,7 +77,7 @@
                 }
                 catch (Exception ex)
                 {
-                    this.Logger.Error<ApiServiceBase>("Failed HttpGet - Fabric.Terminology.API", ex);
+                    this.logger.Error<ApiTransactionManager>("Failed HttpGet - Fabric.Terminology.API", ex);
                     throw;
                 }
             }
@@ -113,7 +99,7 @@
                 }
                 catch (Exception ex)
                 {
-                    this.Logger.Error<ApiServiceBase>("Failed HttpPost - Fabric.Terminology.API", ex);
+                    this.logger.Error<ApiTransactionManager>("Failed HttpPost - Fabric.Terminology.API", ex);
                     throw;
                 }
             }
@@ -130,8 +116,8 @@
                     return Maybe.If(json != null, json);
                 }
 
-                var error = ErrorFactory.CreateError<ApiServiceBase>(json, response.StatusCode);
-                this.Logger.Error<ApiServiceBase>(
+                var error = ErrorFactory.CreateError<ApiTransactionManager>(json, response.StatusCode);
+                this.logger.Error<ApiTransactionManager>(
                     "{@Method} {@Url} returned status {@StatusCode}",
                     error,
                     method,

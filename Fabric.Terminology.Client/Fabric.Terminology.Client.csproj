@@ -10,14 +10,18 @@
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard1.4\Fabric.Terminology.Client.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Compile Include="..\Fabric.Terminology.Client.462\Builders\IApiGetRequest.cs" Link="Builders\IApiGetRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\ApiRequestFactory.cs" Link="Builders\ApiRequestFactory.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\IApiPostRequest.cs" Link="Builders\IApiPostRequest.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\IApiRequest.cs" Link="Builders\IApiRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\IApiRequestFactory.cs" Link="Builders\IApiRequestFactory.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetAddRequest.cs" Link="Builders\ValueSetAddRequest.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetListRequest.cs" Link="Builders\ValueSetListRequest.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetPagedRequest.cs" Link="Builders\ValueSetPagedRequest.cs" />
-    <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetPagedRequestBase.cs" Link="Builders\ValueSetPagedRequestBase.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetRequest.cs" Link="Builders\ValueSetRequest.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetRequestBase.cs" Link="Builders\ValueSetRequestBase.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetSearchRequest.cs" Link="Builders\ValueSetSearchRequest.cs" />
@@ -29,7 +33,7 @@
     <Compile Include="..\Fabric.Terminology.Client.462\Extensions.Logger.cs" Link="Extensions.Logger.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Extensions.String.cs" Link="Extensions.String.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Extensions.ValueSetRequest.cs" Link="Extensions.ValueSetRequest.cs" />
-    <Compile Include="..\Fabric.Terminology.Client.462\ITerminologyContext.cs" Link="ITerminologyContext.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\ISharedTerminology.cs" Link="ISharedTerminology.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Logging\ILogger.cs" Link="Logging\ILogger.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Logging\LogFactory.cs" Link="Logging\LogFactory.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Logging\SerilogAdapter.cs" Link="Logging\SerilogAdapter.cs" />
@@ -44,15 +48,15 @@
     <Compile Include="..\Fabric.Terminology.Client.462\Models\ValueSetCode.cs" Link="Models\ValueSetCode.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Models\ValueSetCreation.cs" Link="Models\ValueSetCreation.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Models\ValueSetMeta.cs" Link="Models\ValueSetMeta.cs" />
-    <Compile Include="..\Fabric.Terminology.Client.462\Services\ApiServiceBase.cs" Link="Services\ApiServiceBase.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Services\ApiTransactionManager.cs" Link="Services\ApiTransactionManager.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Services\IApiTransactionManager.cs" Link="Services\IApiTransactionManager.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Services\IValueSetApiService.cs" Link="Services\IValueSetApiService.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Services\ValueSetApiService.cs" Link="Services\ValueSetApiService.cs" />
-    <Compile Include="..\Fabric.Terminology.Client.462\TerminologyContext.cs" Link="TerminologyContext.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\SharedTerminology.cs" Link="SharedTerminology.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CallMeMaybe" Version="0.6.3.22-alpha" />
     <PackageReference Include="JetBrains.Annotations" Version="11.0.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="semver" Version="2.0.4" />
     <PackageReference Include="serilog" Version="2.5.0" />

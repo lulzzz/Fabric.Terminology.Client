@@ -13,18 +13,18 @@
         {
         }
 
-        [Fact]
-        public void CanGetValueSetPage()
-        {
-            // Arrange
-            var query = this.TerminologyContext.ValueSets.Paged().IncludeAllCodes();
+        //[Fact]
+        //public void CanGetValueSetPage()
+        //{
+        //    // Arrange
+        //    var query = this.TerminologyContext.ValueSets.Paged().IncludeCodes();
 
-            // Act
-            var page = this.Profiler.ExecuteTimed(async () => await query.Execute());
+        //    // Act
+        //    var page = this.Profiler.ExecuteTimed(async () => await query.Execute());
 
-            // Assert
-            page.Should().NotBeNull();
-            page.Values.All(vs => vs.ValueSetCodes.Any()).Should().BeTrue("all value sets should have codes.");
-        }
+        //    // Assert
+        //    page.Should().NotBeNull();
+        //    page.Values.All(vs => vs.ValueSetCodes.Any()).Should().BeTrue("all value sets should have codes.");
+        //}
     }
 }

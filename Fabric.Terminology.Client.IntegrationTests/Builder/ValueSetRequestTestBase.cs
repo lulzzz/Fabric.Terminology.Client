@@ -13,6 +13,6 @@
             this.TerminologyContext = fixture.TerminologyContext;
         }
 
-        protected ITerminologyContext TerminologyContext { get; }
+        protected ISharedTerminology TerminologyContext { get; }
     }
 }

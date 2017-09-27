@@ -2,36 +2,35 @@
 {
     using System;
     using System.Collections.Generic;
-    using Fabric.Terminology.Client.Configuration;
-    using Fabric.Terminology.Client.Logging;
+    using System.Threading.Tasks;
+    using CallMeMaybe;
     using Fabric.Terminology.Client.Models;
-    using Fabric.Terminology.Client.Services;
 
     public class ValueSetRequest
     {
-        private Lazy<IValueSetApiService> valueSetApiService;
+        private readonly IApiRequestFactory requestFactory;
 
-        internal ValueSetRequest(ITerminologyApiSettings settings, ILogger logger)
+        internal ValueSetRequest(IApiRequestFactory requestFactory)
         {
-            this.Initialize(settings, logger);
+            this.requestFactory = requestFactory;
         }
 
-        public ValueSetSingleRequest WithUniqueId(string valueSetUniqueId)
+        public IApiRequest<Task<Maybe<ValueSet>>> WithUniqueId(Guid valueSetGuid)
         {
-            return new ValueSetSingleRequest(this.valueSetApiService, valueSetUniqueId);
+            return this.requestFactory.CreateValueSetSingleRequest(valueSetGuid);
         }
 
-        public ValueSetListRequest WithUniqueIdsIn(IEnumerable<string> valueSetUniqueIds)
+        public IApiRequest<Task<IReadOnlyCollection<ValueSet>>> WithUniqueIdsIn(IEnumerable<Guid> valueSetGuids)
         {
-            return new ValueSetListRequest(this.valueSetApiService, valueSetUniqueIds);
+            return this.requestFactory.CreateValueSetListRequest(valueSetGuids);
         }
 
-        public ValueSetPagedRequest Paged()
+        public IApiRequest<Task<PagedCollection<ValueSet>>> Paged()
         {
             return this.Paged(new PagerSettings());
         }
 
-        public ValueSetPagedRequest Paged(int currentPage, int itemsPerPage = 20)
+        public IApiRequest<Task<PagedCollection<ValueSet>>> Paged(int currentPage, int itemsPerPage = 20)
         {
             var pagerSettings = new PagerSettings
             {
@@ -42,17 +41,21 @@
             return this.Paged(pagerSettings);
         }
 
-        public ValueSetPagedRequest Paged(PagerSettings pagerSettings)
+        public IApiRequest<Task<PagedCollection<ValueSet>>> Paged(PagerSettings pagerSettings)
         {
-            return new ValueSetPagedRequest(this.valueSetApiService, pagerSettings);
+            EnsurePagerSettings(pagerSettings);
+            return this.requestFactory.CreateValueSetPagedRequest(pagerSettings);
         }
 
-        public ValueSetSearchRequest Search(string term)
+        public IApiPostRequest<FindByTermQuery, Task<PagedCollection<ValueSet>>> Search(string term)
         {
             return this.Search(term, 1);
         }
 
-        public ValueSetSearchRequest Search(string term, int currentPage, int itemsPerPage = 20)
+        public IApiPostRequest<FindByTermQuery, Task<PagedCollection<ValueSet>>> Search(
+            string term,
+            int currentPage,
+            int itemsPerPage = 20)
         {
             var pagerSettings = new PagerSettings
             {
@@ -63,19 +66,33 @@
             return this.Search(term, pagerSettings);
         }
 
-        public ValueSetSearchRequest Search(string term, PagerSettings pagerSettings)
+        public IApiPostRequest<FindByTermQuery, Task<PagedCollection<ValueSet>>> Search(
+            string term,
+            PagerSettings pagerSettings)
         {
-            return new ValueSetSearchRequest(this.valueSetApiService, term, pagerSettings);
+            EnsurePagerSettings(pagerSettings);
+            return this.requestFactory.CreateValueSetSearchRequest(term, pagerSettings);
         }
 
-        public ValueSetAddRequest Add(string name, IEnumerable<CodeSetCode> codes)
+        public IApiPostRequest<ValueSetCreation, Task<Maybe<ValueSet>>> Add(
+            string name,
+            ValueSetMeta valueSetMeta,
+            IEnumerable<CodeSetCode> codes)
         {
-            return new ValueSetAddRequest(this.valueSetApiService, name, codes);
+            return this.requestFactory.CreateValueSetAddRequest(name, valueSetMeta, codes);
         }
 
-        private void Initialize(ITerminologyApiSettings settings, ILogger logger)
+        private static void EnsurePagerSettings(PagerSettings settings)
         {
-            this.valueSetApiService = new Lazy<IValueSetApiService>(() => new ValueSetApiService(settings, logger));
+            if (settings.CurrentPage <= 0)
+            {
+                settings.CurrentPage = 1;
+            }
+
+            if (settings.ItemsPerPage < 0)
+            {
+                settings.ItemsPerPage = 10;
+            }
         }
     }
 }
