@@ -101,6 +101,7 @@
     <Compile Include="Models\TerminologyApiError.cs" />
     <Compile Include="Models\ValueSet.cs" />
     <Compile Include="Models\ValueSetCode.cs" />
+    <Compile Include="Models\ValueSetCodeCount.cs" />
     <Compile Include="Models\ValueSetCreation.cs" />
     <Compile Include="Models\ValueSetMeta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,6 @@
-﻿namespace Fabric.Terminology.Client.IntegrationTests.Builder
+﻿using System;
+
+namespace Fabric.Terminology.Client.IntegrationTests.Builder
 {
     using System.Linq;
     using Fabric.Terminology.Client.TestsBase;
@@ -14,27 +16,28 @@
         {
         }
 
-        //[Theory]
-        //[InlineData("00149FF4-480E-4625-8281-500FB6D327E3")]
-        //[InlineData("003DB2E6-77F1-4449-B085-044B20BD179C")]
-        //[InlineData("01F981E5-2C94-4850-B6DA-03BBAF46E3ED")]
-        //[InlineData("1297BB11-927B-438C-9715-853FED36C300")]
-        //[InlineData("17316FBA-0D34-400A-B30E-47895EFAD962")]
-        //public void CanGetValueSet(string valueSetUniqueId)
-        //{
-        //    // Arrange
+        [Theory]
+        [InlineData("00149FF4-480E-4625-8281-500FB6D327E3")]
+        [InlineData("003DB2E6-77F1-4449-B085-044B20BD179C")]
+        [InlineData("01F981E5-2C94-4850-B6DA-03BBAF46E3ED")]
+        [InlineData("1297BB11-927B-438C-9715-853FED36C300")]
+        [InlineData("17316FBA-0D34-400A-B30E-47895EFAD962")]
+        public void CanGetValueSet(string valueSetReferenceId)
+        {
+            // Arrange
+            var valueSetGuid = Guid.Parse(valueSetReferenceId);
 
-        //    // Act
-        //    var query = this.TerminologyContext.ValueSets.WithUniqueId(valueSetUniqueId).IncludeCodes();
+            // Act
+            var query = this.TerminologyContext.ValueSets.WithUniqueId(valueSetGuid).IncludeCodes();
 
-        //    var maybe = this.Profiler.ExecuteTimed(async () => await query.Execute());
-        //    maybe.HasValue.Should().BeTrue();
-        //    var valueSet = maybe.Single();
+            var maybe = this.Profiler.ExecuteTimed(async () => await query.Execute());
+            maybe.HasValue.Should().BeTrue();
+            var valueSet = maybe.Single();
 
-        //    // Assert
-        //    valueSet.Should().NotBeNull("value set unique id corresponds to a known value set.");
-        //    valueSet.ValueSetUniqueId.Should().Be(valueSetUniqueId, "the unique id of the returned value set should match the unique id queried.");
-        //    valueSet.ValueSetCodes.Any().Should().BeTrue("all value sets should have codes.");
-        //}
+            // Assert
+            valueSet.Should().NotBeNull("value set unique id corresponds to a known value set.");
+            valueSet.ValueSetReferenceId.Should().Be(valueSetReferenceId, "the unique id of the returned value set should match the unique id queried.");
+            valueSet.ValueSetCodes.Any().Should().BeTrue("all value sets should have codes.");
+        }
     }
 }
