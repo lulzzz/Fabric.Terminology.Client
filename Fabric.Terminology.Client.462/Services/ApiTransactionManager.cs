@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-
-namespace Fabric.Terminology.Client.Services
+﻿namespace Fabric.Terminology.Client.Services
 {
     using System;
     using System.Collections.Generic;
@@ -14,6 +12,7 @@ namespace Fabric.Terminology.Client.Services
     using Fabric.Terminology.Client.Logging;
     using Fabric.Terminology.Client.Models;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     internal class ApiTransactionManager : IApiTransactionManager
     {
@@ -43,11 +42,9 @@ namespace Fabric.Terminology.Client.Services
 
         public async Task<IReadOnlyCollection<TResult>> GetApiResultList<TResult>(string url)
         {
-            var result = (await this.GetApiJson(url))
+            return (await this.GetApiJson(url))
                 .Select(t => t.ToObject<IReadOnlyCollection<TResult>>())
                 .Else(new List<TResult>());
-
-            return result.ToArray();
         }
 
         public async Task<PagedCollection<TResult>> GetApiResultPage<TResult>(string url)
@@ -117,7 +114,8 @@ namespace Fabric.Terminology.Client.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var jo = JObject.Parse(json);
-                    return Maybe.If(jo["result"] != null, jo["result"]).Else(jo);
+                    return Maybe.If(jo["result"] != null, jo["result"])
+                            .Else(jo);
                 }
 
                 var error = ErrorFactory.CreateError<ApiTransactionManager>(json, response.StatusCode);
