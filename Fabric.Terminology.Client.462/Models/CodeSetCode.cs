@@ -5,22 +5,16 @@
 
     public class CodeSetCode
     {
+        [JsonProperty("codeGuid")]
+        public Guid CodeGuid { get; internal set; }
+
         [JsonProperty("code")]
-        public string Code { get; set; }
+        public string Code { get; internal set; }
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public string Name { get; internal set; }
 
-        [JsonProperty("codeSystem")]
-        public CodeSystem CodeSystem { get; set; }
-
-        [JsonProperty("sourceDescription")]
-        public string SourceDescription { get; set; }
-
-        [JsonProperty("versionDescription")]
-        public string VersionDescription { get; set; }
-
-        [JsonProperty("lastLoadDate")]
-        public DateTime LastLoadDate { get; set; }
+        [JsonProperty("codeSystemGuid")]
+        public Guid CodeSystemGuid { get; internal set; }
     }
 }
