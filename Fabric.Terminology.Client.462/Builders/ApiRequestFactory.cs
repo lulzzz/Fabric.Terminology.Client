@@ -15,22 +15,22 @@
             this.valueSetApiService = valueSetApiService;
         }
 
-        public IApiRequest<Maybe<ValueSet>> CreateValueSetSingleRequest(Guid valueSetGuid)
+        public IApiRequestWithParameters<Maybe<ValueSet>> CreateValueSetSingleRequest(Guid valueSetGuid)
         {
             return new ValueSetSingleRequest(this.valueSetApiService.Value, valueSetGuid);
         }
 
-        public IApiRequest<IReadOnlyCollection<ValueSet>> CreateValueSetListRequest(IEnumerable<Guid> valueSetGuids)
+        public IApiRequestWithParameters<IReadOnlyCollection<ValueSet>> CreateValueSetListRequest(IEnumerable<Guid> valueSetGuids)
         {
             return new ValueSetListRequest(this.valueSetApiService.Value, valueSetGuids);
         }
 
-        public IApiRequest<PagedCollection<ValueSet>> CreateValueSetPagedRequest(PagerSettings pagerSettings)
+        public IApiRequestWithParameters<PagedCollection<ValueSet>> CreateValueSetPagedRequest(PagerSettings pagerSettings)
         {
             return new ValueSetPagedRequest(this.valueSetApiService.Value, pagerSettings);
         }
 
-        public IApiPostRequest<FindByTermQuery, PagedCollection<ValueSet>> CreateValueSetSearchRequest(string term, PagerSettings pagerSettings)
+        public IApiPostRequestWithParameters<FindByTermQuery, PagedCollection<ValueSet>> CreateValueSetSearchRequest(string term, PagerSettings pagerSettings)
         {
             return new ValueSetSearchRequest(this.valueSetApiService.Value, term, pagerSettings);
         }

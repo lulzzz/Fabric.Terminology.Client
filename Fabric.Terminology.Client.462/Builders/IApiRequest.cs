@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace Fabric.Terminology.Client.Builders
+﻿namespace Fabric.Terminology.Client.Builders
 {
+    using System.Threading.Tasks;
+
     public interface IApiRequest<TResult> : IApiRequest
     {
         Task<TResult> Execute();

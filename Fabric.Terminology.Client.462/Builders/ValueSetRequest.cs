@@ -14,22 +14,22 @@
             this.requestFactory = requestFactory;
         }
 
-        public IApiRequest<Maybe<ValueSet>> WithUniqueId(Guid valueSetGuid)
+        public IApiRequestWithParameters<Maybe<ValueSet>> WithUniqueId(Guid valueSetGuid)
         {
             return this.requestFactory.CreateValueSetSingleRequest(valueSetGuid);
         }
 
-        public IApiRequest<IReadOnlyCollection<ValueSet>> WithUniqueIdsIn(IEnumerable<Guid> valueSetGuids)
+        public IApiRequestWithParameters<IReadOnlyCollection<ValueSet>> WithUniqueIdsIn(IEnumerable<Guid> valueSetGuids)
         {
             return this.requestFactory.CreateValueSetListRequest(valueSetGuids);
         }
 
-        public IApiRequest<PagedCollection<ValueSet>> Paged()
+        public IApiRequestWithParameters<PagedCollection<ValueSet>> Paged()
         {
             return this.Paged(new PagerSettings());
         }
 
-        public IApiRequest<PagedCollection<ValueSet>> Paged(int currentPage, int itemsPerPage = 20)
+        public IApiRequestWithParameters<PagedCollection<ValueSet>> Paged(int currentPage, int itemsPerPage = 20)
         {
             var pagerSettings = new PagerSettings
             {
@@ -40,18 +40,18 @@
             return this.Paged(pagerSettings);
         }
 
-        public IApiRequest<PagedCollection<ValueSet>> Paged(PagerSettings pagerSettings)
+        public IApiRequestWithParameters<PagedCollection<ValueSet>> Paged(PagerSettings pagerSettings)
         {
             EnsurePagerSettings(pagerSettings);
             return this.requestFactory.CreateValueSetPagedRequest(pagerSettings);
         }
 
-        public IApiPostRequest<FindByTermQuery, PagedCollection<ValueSet>> Search(string term)
+        public IApiPostRequestWithParameters<FindByTermQuery, PagedCollection<ValueSet>> Search(string term)
         {
             return this.Search(term, 1);
         }
 
-        public IApiPostRequest<FindByTermQuery, PagedCollection<ValueSet>> Search(
+        public IApiPostRequestWithParameters<FindByTermQuery, PagedCollection<ValueSet>> Search(
             string term,
             int currentPage,
             int itemsPerPage = 20)
@@ -65,7 +65,7 @@
             return this.Search(term, pagerSettings);
         }
 
-        public IApiPostRequest<FindByTermQuery, PagedCollection<ValueSet>> Search(
+        public IApiPostRequestWithParameters<FindByTermQuery, PagedCollection<ValueSet>> Search(
             string term,
             PagerSettings pagerSettings)
         {

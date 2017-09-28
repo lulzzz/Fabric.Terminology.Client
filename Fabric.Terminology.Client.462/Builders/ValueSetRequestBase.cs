@@ -3,35 +3,36 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using Fabric.Terminology.Client.Services;
 
-    public abstract class ValueSetGetRequestBase
+    public abstract class ValueSetRequestBase<TResult> : IApiRequestWithParameters<TResult>
     {
         private readonly IList<Guid> codeSytemGuids = new List<Guid>();
 
-        protected ValueSetGetRequestBase(IValueSetApiService service)
+        protected ValueSetRequestBase(IValueSetApiService service)
         {
             this.ValueSetApiService = service;
         }
 
-        internal bool Summary { get; set; } = true;
+        public bool Summary { get; set; } = true;
 
-        internal IEnumerable<Guid> CodeSystemGuidFilters => this.codeSytemGuids;
+        public IEnumerable<Guid> CodeSystemGuidFilters => this.codeSytemGuids;
 
         protected IValueSetApiService ValueSetApiService { get; }
 
-        internal void AddCodeSytemFilter(Guid codeSystemGuid)
+        public void AddCodeSytemFilter(Guid codeSystemGuid)
         {
             this.codeSytemGuids.Add(codeSystemGuid);
         }
 
-        internal string BuildQueryString()
+        public string BuildQueryString()
         {
             var qs = string.Empty;
 
-            if (this.Summary)
+            if (!this.Summary)
             {
-                qs += $"$summary=true";
+                qs += $"$summary=false";
             }
 
             if (this.CodeSystemGuidFilters.Any())
@@ -48,5 +49,9 @@
 
             return qs.Length == 0 ? string.Empty : $"?{qs}";
         }
+
+        public abstract Task<TResult> Execute();
+
+        public abstract string GetEndpoint();
     }
 }

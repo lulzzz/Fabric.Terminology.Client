@@ -8,13 +8,13 @@
 
     public interface IApiRequestFactory
     {
-        IApiRequest<Maybe<ValueSet>> CreateValueSetSingleRequest(Guid valueSetGuid);
+        IApiRequestWithParameters<Maybe<ValueSet>> CreateValueSetSingleRequest(Guid valueSetGuid);
 
-        IApiRequest<IReadOnlyCollection<ValueSet>> CreateValueSetListRequest(IEnumerable<Guid> valueSetGuids);
+        IApiRequestWithParameters<IReadOnlyCollection<ValueSet>> CreateValueSetListRequest(IEnumerable<Guid> valueSetGuids);
 
-        IApiRequest<PagedCollection<ValueSet>> CreateValueSetPagedRequest(PagerSettings pagerSettings);
+        IApiRequestWithParameters<PagedCollection<ValueSet>> CreateValueSetPagedRequest(PagerSettings pagerSettings);
 
-        IApiPostRequest<FindByTermQuery, PagedCollection<ValueSet>> CreateValueSetSearchRequest(
+        IApiPostRequestWithParameters<FindByTermQuery, PagedCollection<ValueSet>> CreateValueSetSearchRequest(
             string term,
             PagerSettings pagerSettings);
 

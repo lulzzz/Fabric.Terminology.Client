@@ -66,10 +66,12 @@
   <ItemGroup>
     <Compile Include="Builders\ApiRequestFactory.cs" />
     <Compile Include="Builders\IApiPostRequest.cs" />
+    <Compile Include="Builders\IApiPostRequestWithParameters.cs" />
     <Compile Include="Builders\IApiRequest.cs" />
     <Compile Include="Builders\IApiRequestFactory.cs" />
+    <Compile Include="Builders\IApiRequestWithParameters.cs" />
     <Compile Include="Builders\ValueSetAddRequest.cs" />
-    <Compile Include="Builders\ValueSetGetRequestBase.cs" />
+    <Compile Include="Builders\ValueSetRequestBase.cs" />
     <Compile Include="Builders\ValueSetListRequest.cs" />
     <Compile Include="Builders\ValueSetPagedRequest.cs" />
     <Compile Include="Builders\ValueSetRequest.cs" />
@@ -98,7 +100,7 @@
     <Compile Include="Models\FindByTermQuery.cs" />
     <Compile Include="Models\PagedCollection{T}.cs" />
     <Compile Include="Models\PagerSettings.cs" />
-    <Compile Include="Models\TerminologyApiError.cs" />
+    <Compile Include="Exceptions\TerminologyApiError.cs" />
     <Compile Include="Models\ValueSet.cs" />
     <Compile Include="Models\ValueSetCode.cs" />
     <Compile Include="Models\ValueSetCodeCount.cs" />

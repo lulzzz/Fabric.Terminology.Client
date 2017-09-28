@@ -29,14 +29,13 @@ namespace Fabric.Terminology.Client.IntegrationTests.Builder
             };
 
             // Act
-            var query = this.TerminologyContext.ValueSets.WithUniqueIdsIn(valueSetGuids);
+            var query = this.TerminologyContext.ValueSets.WithUniqueIdsIn(valueSetGuids).IncludeCodes();
 
             var valueSets = this.Profiler.ExecuteTimed(async () => await query.Execute());
 
             // Assert
-            valueSets.Any().Should().BeTrue("passed five valid unique ids.");
+            valueSets.Should().NotBeEmpty("passed five valid unique ids.");
             valueSets.Count.Should().Be(5, "five valid unique ids were requested.");
-            valueSets.All(vs => vs.ValueSetCodes.Any()).Should().BeTrue("All value sets should have codes.");
         }
     }
 }

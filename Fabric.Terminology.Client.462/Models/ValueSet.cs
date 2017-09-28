@@ -31,9 +31,9 @@
         public bool IsLatestVersion { get; set; }
 
         [JsonProperty("codeCounts")]
-        public IReadOnlyCollection<ValueSetCode> CodeCounts { get; set; }
+        public IReadOnlyCollection<ValueSetCodeCount> CodeCounts { get; set; } = new List<ValueSetCodeCount>();
 
         [JsonProperty("valueSetCodes")]
-        public IReadOnlyCollection<ValueSetCode> ValueSetCodes { get; set; }
+        public IReadOnlyCollection<ValueSetCode> ValueSetCodes { get; set; } = new List<ValueSetCode>();
     }
 }

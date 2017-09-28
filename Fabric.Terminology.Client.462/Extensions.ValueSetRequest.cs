@@ -7,24 +7,21 @@
 
     public static partial class Extensions
     {
-        public static TRequest IncludeCodes<TRequest>(this TRequest request)
-            where TRequest : ValueSetGetRequestBase
+        public static IApiRequestWithParameters<T> IncludeCodes<T>(this IApiRequestWithParameters<T> request)
         {
             request.Summary = false;
             return request;
         }
 
-        public static TRequest CodesFilteredByCodeSystem<TRequest>(this TRequest request, Guid codeSystemGuid)
-            where TRequest : ValueSetGetRequestBase
+        public static IApiRequestWithParameters<T> CodesFilteredByCodeSystem<T>(this IApiRequestWithParameters<T> request, Guid codeSystemGuid)
         {
             request.AddCodeSytemFilter(codeSystemGuid);
             return request;
         }
 
-        public static TRequest CodesFilteredByCodeSystem<TRequest>(
-            this TRequest request,
+        public static IApiRequestWithParameters<T> CodesFilteredByCodeSystem<T>(
+            this IApiRequestWithParameters<T> request,
             IEnumerable<Guid> codeSystemGuids)
-            where TRequest : ValueSetGetRequestBase
         {
             foreach (var code in codeSystemGuids.ToArray())
             {

@@ -1,9 +1,6 @@
-﻿using System;
-
-namespace Fabric.Terminology.Client.IntegrationTests.Builder
+﻿namespace Fabric.Terminology.Client.IntegrationTests.Builder
 {
-    using System.Linq;
-    using Fabric.Terminology.Client.TestsBase;
+    using System;
     using Fabric.Terminology.Client.TestsBase.Fixtures;
     using FluentAssertions;
     using Xunit;
@@ -36,8 +33,8 @@ namespace Fabric.Terminology.Client.IntegrationTests.Builder
 
             // Assert
             valueSet.Should().NotBeNull("value set unique id corresponds to a known value set.");
-            valueSet.ValueSetReferenceId.Should().Be(valueSetReferenceId, "the unique id of the returned value set should match the unique id queried.");
-            valueSet.ValueSetCodes.Any().Should().BeTrue("all value sets should have codes.");
+            valueSet.CodeCounts.Should().NotBeEmpty();
+            valueSet.ValueSetCodes.Should().NotBeEmpty("because all codes should be included");
         }
     }
 }

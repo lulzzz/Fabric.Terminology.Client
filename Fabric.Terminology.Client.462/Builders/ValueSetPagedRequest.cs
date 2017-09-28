@@ -4,7 +4,7 @@
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetPagedRequest : ValueSetGetRequestBase, IApiRequest<PagedCollection<ValueSet>>
+    public class ValueSetPagedRequest : ValueSetRequestBase<PagedCollection<ValueSet>>
     {
         private readonly PagerSettings pagerSettings;
 
@@ -14,18 +14,17 @@
             this.pagerSettings = pagerSettings;
         }
 
-        public virtual Task<PagedCollection<ValueSet>> Execute()
+        public override Task<PagedCollection<ValueSet>> Execute()
         {
             return this.ValueSetApiService.GetValueSetPage(this);
         }
 
-        public string GetEndpoint()
+        public override string GetEndpoint()
         {
             var pageQs = $"$top={this.pagerSettings.ItemsPerPage}&$skip{this.pagerSettings.CurrentPage - 1}";
             var qs = this.BuildQueryString();
 
             return qs.IsNullOrWhiteSpace() ? $"?{pageQs}" : $"{qs}&{pageQs}";
         }
-
     }
 }

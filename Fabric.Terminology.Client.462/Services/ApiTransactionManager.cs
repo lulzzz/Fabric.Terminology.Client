@@ -1,4 +1,6 @@
-﻿namespace Fabric.Terminology.Client.Services
+﻿using Newtonsoft.Json.Linq;
+
+namespace Fabric.Terminology.Client.Services
 {
     using System;
     using System.Collections.Generic;
@@ -29,21 +31,21 @@
 
         public async Task<Maybe<TResult>> GetApiResult<TResult>(string url)
         {
-            return (await this.GetApiJson(url)).Select(JsonConvert.DeserializeObject<TResult>);
+            return (await this.GetApiJson(url)).Select(t => t.ToObject<TResult>());
         }
 
         public async Task<Maybe<TResult>> PostApiResult<TResult, TModel>(string url, TModel model)
             where TModel : class
         {
             return (await this.PostApiResult(url, model))
-                        .Select(JsonConvert.DeserializeObject<TResult>);
+                        .Select(t => t.ToObject<TResult>());
         }
 
         public async Task<IReadOnlyCollection<TResult>> GetApiResultList<TResult>(string url)
         {
             var result = (await this.GetApiJson(url))
-                .Select(JsonConvert.DeserializeObject<IEnumerable<TResult>>)
-                .Else(Enumerable.Empty<TResult>());
+                .Select(t => t.ToObject<IReadOnlyCollection<TResult>>())
+                .Else(new List<TResult>());
 
             return result.ToArray();
         }
@@ -51,7 +53,7 @@
         public async Task<PagedCollection<TResult>> GetApiResultPage<TResult>(string url)
         {
             return (await this.GetApiJson(url))
-                    .Select(JsonConvert.DeserializeObject<PagedCollection<TResult>>)
+                    .Select(t => t.ToObject<PagedCollection<TResult>>())
                     .Else(PagedCollection<TResult>.Empty);
         }
 
@@ -59,11 +61,11 @@
             where TModel : class
         {
             return (await this.PostApiResult(url, model))
-                    .Select(JsonConvert.DeserializeObject<PagedCollection<TResult>>)
+                    .Select(t => t.ToObject<PagedCollection<TResult>>())
                     .Else(PagedCollection<TResult>.Empty);
         }
 
-        private async Task<Maybe<string>> GetApiJson(string url)
+        private async Task<Maybe<JToken>> GetApiJson(string url)
         {
             using (var client = new HttpClient())
             {
@@ -72,7 +74,8 @@
                 {
                     using (var response = await client.GetAsync(url))
                     {
-                        return await this.GetHttpContent(HttpMethod.Get, url, response);
+                        var token = await this.GetHttpContent(HttpMethod.Get, url, response);
+                        return token;
                     }
                 }
                 catch (Exception ex)
@@ -83,7 +86,7 @@
             }
         }
 
-        private async Task<Maybe<string>> PostApiResult<TModel>(string url, TModel model)
+        private async Task<Maybe<JToken>> PostApiResult<TModel>(string url, TModel model)
             where TModel : class
         {
             var requestContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
@@ -105,7 +108,7 @@
             }
         }
 
-        private async Task<Maybe<string>> GetHttpContent(HttpMethod method, string url, HttpResponseMessage response)
+        private async Task<Maybe<JToken>> GetHttpContent(HttpMethod method, string url, HttpResponseMessage response)
         {
             using (var content = response.Content)
             {
@@ -113,7 +116,8 @@
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return Maybe.If(json != null, json);
+                    var jo = JObject.Parse(json);
+                    return Maybe.If(jo["result"] != null, jo["result"]).Else(jo);
                 }
 
                 var error = ErrorFactory.CreateError<ApiTransactionManager>(json, response.StatusCode);
@@ -123,7 +127,7 @@
                     method,
                     url,
                     response.StatusCode.ToString());
-                return Maybe<string>.Not;
+                return Maybe<JToken>.Not;
             }
         }
     }

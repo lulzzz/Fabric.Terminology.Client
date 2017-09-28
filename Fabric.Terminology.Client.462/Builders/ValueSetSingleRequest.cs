@@ -6,7 +6,7 @@
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetSingleRequest : ValueSetGetRequestBase, IApiRequest<Maybe<ValueSet>>
+    public class ValueSetSingleRequest : ValueSetRequestBase<Maybe<ValueSet>>
     {
         internal ValueSetSingleRequest(IValueSetApiService valueSetApiService, Guid valueSetGuid)
             : base(valueSetApiService)
@@ -16,12 +16,12 @@
 
         internal Guid ValueSetGuid { get; }
 
-        public string GetEndpoint()
+        public override string GetEndpoint()
         {
             return $"{this.ValueSetGuid}{this.BuildQueryString()}";
         }
 
-        public Task<Maybe<ValueSet>> Execute()
+        public override Task<Maybe<ValueSet>> Execute()
         {
             return this.ValueSetApiService.GetValueSet(this);
         }

@@ -7,7 +7,7 @@
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetListRequest : ValueSetGetRequestBase, IApiRequest<IReadOnlyCollection<ValueSet>>
+    public class ValueSetListRequest : ValueSetRequestBase<IReadOnlyCollection<ValueSet>>
     {
         private readonly HashSet<Guid> valueSetGuids = new HashSet<Guid>();
 
@@ -23,12 +23,12 @@
             this.Initialize(setUniqueIds);
         }
 
-        public Task<IReadOnlyCollection<ValueSet>> Execute()
+        public override Task<IReadOnlyCollection<ValueSet>> Execute()
         {
             return this.ValueSetApiService.GetValueSets(this);
         }
 
-        public string GetEndpoint()
+        public override string GetEndpoint()
         {
             return $"{string.Join(",", this.valueSetGuids)}{this.BuildQueryString()}";
         }

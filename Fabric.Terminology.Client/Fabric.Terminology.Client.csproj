@@ -17,17 +17,21 @@
   <ItemGroup>
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ApiRequestFactory.cs" Link="Builders\ApiRequestFactory.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\IApiPostRequest.cs" Link="Builders\IApiPostRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\IApiPostRequestWithParameters.cs" Link="Builders\IApiPostRequestWithParameters.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\IApiRequest.cs" Link="Builders\IApiRequest.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\IApiRequestFactory.cs" Link="Builders\IApiRequestFactory.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\IApiRequestWithParameters.cs" Link="Builders\IApiRequestWithParameters.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetAddRequest.cs" Link="Builders\ValueSetAddRequest.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetListRequest.cs" Link="Builders\ValueSetListRequest.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetPagedRequest.cs" Link="Builders\ValueSetPagedRequest.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetRequest.cs" Link="Builders\ValueSetRequest.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetRequestBase.cs" Link="Builders\ValueSetRequestBase.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetSearchRequest.cs" Link="Builders\ValueSetSearchRequest.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Builders\ValueSetSingleRequest.cs" Link="Builders\ValueSetSingleRequest.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Configuration\ITerminologyApiSettings.cs" Link="Configuration\ITerminologyApiSettings.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Configuration\TerminologyApiSettings.cs" Link="Configuration\TerminologyApiSettings.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Configuration\TerminologyClientVersion.cs" Link="Configuration\TerminologyClientVersion.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Exceptions\TerminologyApiError.cs" Link="Exceptions\TerminologyApiError.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Extensions.cs" Link="Extensions.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Extensions.Logger.cs" Link="Extensions.Logger.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Extensions.String.cs" Link="Extensions.String.cs" />
@@ -42,9 +46,9 @@
     <Compile Include="..\Fabric.Terminology.Client.462\Models\FindByTermQuery.cs" Link="Models\FindByTermQuery.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Models\PagedCollection{T}.cs" Link="Models\PagedCollection{T}.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Models\PagerSettings.cs" Link="Models\PagerSettings.cs" />
-    <Compile Include="..\Fabric.Terminology.Client.462\Models\TerminologyApiError.cs" Link="Models\TerminologyApiError.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Models\ValueSet.cs" Link="Models\ValueSet.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Models\ValueSetCode.cs" Link="Models\ValueSetCode.cs" />
+    <Compile Include="..\Fabric.Terminology.Client.462\Models\ValueSetCodeCount.cs" Link="Models\ValueSetCodeCount.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Models\ValueSetCreation.cs" Link="Models\ValueSetCreation.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Models\ValueSetMeta.cs" Link="Models\ValueSetMeta.cs" />
     <Compile Include="..\Fabric.Terminology.Client.462\Services\ApiTransactionManager.cs" Link="Services\ApiTransactionManager.cs" />
@@ -72,6 +76,7 @@
     <Folder Include="Configuration\" />
     <Folder Include="Logging\" />
     <Folder Include="Models\" />
+    <Folder Include="Exceptions\" />
     <Folder Include="Services\" />
   </ItemGroup>
 </Project>
