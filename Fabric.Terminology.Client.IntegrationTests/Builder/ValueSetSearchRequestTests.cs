@@ -13,7 +13,7 @@
         public ValueSetSearchRequestTests(ITestOutputHelper output, TerminologyFixture fixture)
             : base(output, fixture)
         {
-            this.terminology = fixture.TerminologyContext;
+            this.terminology = fixture.SharedTerminology;
         }
 
         [Theory]

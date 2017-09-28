@@ -24,7 +24,7 @@
         //    var codes = MockApiModelBuilder.BuildCodeSetCodeCollection(codeCount);
 
         //    // Act
-        //    var query = this.TerminologyContext.ValueSets.Add(name, codes);
+        //    var query = this.SharedTerminology.ValueSets.Add(name, codes);
         //    var maybe = this.Profiler.ExecuteTimed(async () => await query.Execute());
 
         //    // Assert

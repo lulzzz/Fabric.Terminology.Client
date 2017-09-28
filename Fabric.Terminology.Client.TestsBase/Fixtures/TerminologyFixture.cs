@@ -1,10 +1,9 @@
-﻿using System;
-using Fabric.Terminology.Client.Builders;
-using Fabric.Terminology.Client.Services;
-
-namespace Fabric.Terminology.Client.TestsBase.Fixtures
+﻿namespace Fabric.Terminology.Client.TestsBase.Fixtures
 {
+    using System;
+    using Fabric.Terminology.Client.Builders;
     using Fabric.Terminology.Client.Logging;
+    using Fabric.Terminology.Client.Services;
     using Moq;
     using Serilog.Core;
 
@@ -15,7 +14,7 @@ namespace Fabric.Terminology.Client.TestsBase.Fixtures
             this.Initialize();
         }
 
-        public ISharedTerminology TerminologyContext { get; private set; }
+        public ISharedTerminology SharedTerminology { get; private set; }
 
         private void Initialize()
         {
@@ -26,7 +25,7 @@ namespace Fabric.Terminology.Client.TestsBase.Fixtures
             var valueSetApiService = new Lazy<IValueSetApiService>(() => new ValueSetApiService(transactionManager));
             var apiRequestFactory = new ApiRequestFactory(valueSetApiService);
 
-            this.TerminologyContext = new SharedTerminology(apiRequestFactory);
+            this.SharedTerminology = new SharedTerminology(apiRequestFactory);
         }
     }
 }
