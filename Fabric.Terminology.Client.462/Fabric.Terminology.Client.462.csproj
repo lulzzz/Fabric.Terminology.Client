@@ -69,10 +69,10 @@
     <Compile Include="Builders\IApiRequest.cs" />
     <Compile Include="Builders\IApiRequestFactory.cs" />
     <Compile Include="Builders\ValueSetAddRequest.cs" />
+    <Compile Include="Builders\ValueSetGetRequestBase.cs" />
     <Compile Include="Builders\ValueSetListRequest.cs" />
     <Compile Include="Builders\ValueSetPagedRequest.cs" />
     <Compile Include="Builders\ValueSetRequest.cs" />
-    <Compile Include="Builders\ValueSetRequestBase.cs" />
     <Compile Include="Builders\ValueSetSearchRequest.cs" />
     <Compile Include="Builders\ValueSetSingleRequest.cs" />
     <Compile Include="Configuration\ITerminologyApiSettings.cs" />

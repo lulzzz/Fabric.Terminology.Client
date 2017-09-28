@@ -1,29 +1,24 @@
-﻿#pragma warning disable SA1402 // File may only contain a single class
-namespace Fabric.Terminology.Client.Builders
+﻿namespace Fabric.Terminology.Client.Builders
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using Fabric.Terminology.Client.Services;
 
-    public abstract class ValueSetRequestBase
+    public abstract class ValueSetGetRequestBase
     {
         private readonly IList<Guid> codeSytemGuids = new List<Guid>();
 
-        private readonly Lazy<IValueSetApiService> valueSetApiService;
-
-        protected ValueSetRequestBase(Lazy<IValueSetApiService> service)
+        protected ValueSetGetRequestBase(IValueSetApiService service)
         {
-            this.valueSetApiService = service;
-            this.Summary = true;
+            this.ValueSetApiService = service;
         }
 
-        internal bool Summary { get; set; }
+        internal bool Summary { get; set; } = true;
 
         internal IEnumerable<Guid> CodeSystemGuidFilters => this.codeSytemGuids;
 
-        protected IValueSetApiService ValueSetApiService => this.valueSetApiService.Value;
+        protected IValueSetApiService ValueSetApiService { get; }
 
         internal void AddCodeSytemFilter(Guid codeSystemGuid)
         {
@@ -55,4 +50,3 @@ namespace Fabric.Terminology.Client.Builders
         }
     }
 }
-#pragma warning disable SA1402 // File may only contain a single class

@@ -1,16 +1,14 @@
 ﻿namespace Fabric.Terminology.Client.Builders
 {
-    using System;
     using System.Threading.Tasks;
-    using Fabric.Terminology.Client;
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetPagedRequest : ValueSetRequestBase, IApiRequest<Task<PagedCollection<ValueSet>>>
+    public class ValueSetPagedRequest : ValueSetGetRequestBase, IApiRequest<PagedCollection<ValueSet>>
     {
         private readonly PagerSettings pagerSettings;
 
-        internal ValueSetPagedRequest(Lazy<IValueSetApiService> valueSetApiService, PagerSettings pagerSettings)
+        internal ValueSetPagedRequest(IValueSetApiService valueSetApiService, PagerSettings pagerSettings)
             : base(valueSetApiService)
         {
             this.pagerSettings = pagerSettings;

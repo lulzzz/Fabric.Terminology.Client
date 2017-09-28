@@ -1,8 +1,10 @@
-﻿namespace Fabric.Terminology.Client.Builders
+﻿using System.Threading.Tasks;
+
+namespace Fabric.Terminology.Client.Builders
 {
-    public interface IApiRequest<out TResult> : IApiRequest
+    public interface IApiRequest<TResult> : IApiRequest
     {
-        TResult Execute();
+        Task<TResult> Execute();
     }
 
     public interface IApiRequest

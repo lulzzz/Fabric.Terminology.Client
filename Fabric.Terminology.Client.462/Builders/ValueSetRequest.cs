@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using CallMeMaybe;
     using Fabric.Terminology.Client.Models;
 
@@ -15,22 +14,22 @@
             this.requestFactory = requestFactory;
         }
 
-        public IApiRequest<Task<Maybe<ValueSet>>> WithUniqueId(Guid valueSetGuid)
+        public IApiRequest<Maybe<ValueSet>> WithUniqueId(Guid valueSetGuid)
         {
             return this.requestFactory.CreateValueSetSingleRequest(valueSetGuid);
         }
 
-        public IApiRequest<Task<IReadOnlyCollection<ValueSet>>> WithUniqueIdsIn(IEnumerable<Guid> valueSetGuids)
+        public IApiRequest<IReadOnlyCollection<ValueSet>> WithUniqueIdsIn(IEnumerable<Guid> valueSetGuids)
         {
             return this.requestFactory.CreateValueSetListRequest(valueSetGuids);
         }
 
-        public IApiRequest<Task<PagedCollection<ValueSet>>> Paged()
+        public IApiRequest<PagedCollection<ValueSet>> Paged()
         {
             return this.Paged(new PagerSettings());
         }
 
-        public IApiRequest<Task<PagedCollection<ValueSet>>> Paged(int currentPage, int itemsPerPage = 20)
+        public IApiRequest<PagedCollection<ValueSet>> Paged(int currentPage, int itemsPerPage = 20)
         {
             var pagerSettings = new PagerSettings
             {
@@ -41,18 +40,18 @@
             return this.Paged(pagerSettings);
         }
 
-        public IApiRequest<Task<PagedCollection<ValueSet>>> Paged(PagerSettings pagerSettings)
+        public IApiRequest<PagedCollection<ValueSet>> Paged(PagerSettings pagerSettings)
         {
             EnsurePagerSettings(pagerSettings);
             return this.requestFactory.CreateValueSetPagedRequest(pagerSettings);
         }
 
-        public IApiPostRequest<FindByTermQuery, Task<PagedCollection<ValueSet>>> Search(string term)
+        public IApiPostRequest<FindByTermQuery, PagedCollection<ValueSet>> Search(string term)
         {
             return this.Search(term, 1);
         }
 
-        public IApiPostRequest<FindByTermQuery, Task<PagedCollection<ValueSet>>> Search(
+        public IApiPostRequest<FindByTermQuery, PagedCollection<ValueSet>> Search(
             string term,
             int currentPage,
             int itemsPerPage = 20)
@@ -66,7 +65,7 @@
             return this.Search(term, pagerSettings);
         }
 
-        public IApiPostRequest<FindByTermQuery, Task<PagedCollection<ValueSet>>> Search(
+        public IApiPostRequest<FindByTermQuery, PagedCollection<ValueSet>> Search(
             string term,
             PagerSettings pagerSettings)
         {
@@ -74,7 +73,7 @@
             return this.requestFactory.CreateValueSetSearchRequest(term, pagerSettings);
         }
 
-        public IApiPostRequest<ValueSetCreation, Task<Maybe<ValueSet>>> Add(
+        public IApiPostRequest<ValueSetCreation, Maybe<ValueSet>> Add(
             string name,
             ValueSetMeta valueSetMeta,
             IEnumerable<CodeSetCode> codes)

@@ -8,9 +8,9 @@
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetAddRequest : IApiPostRequest<ValueSetCreation, Task<Maybe<ValueSet>>>
+    public class ValueSetAddRequest : IApiPostRequest<ValueSetCreation, Maybe<ValueSet>>
     {
-        private readonly Lazy<IValueSetApiService> valueSetApiService;
+        private readonly IValueSetApiService valueSetApiService;
 
         private readonly string name;
 
@@ -18,7 +18,7 @@
 
         private readonly IReadOnlyCollection<CodeSetCode> codes;
 
-        internal ValueSetAddRequest(Lazy<IValueSetApiService> valueSetApiService, string name, ValueSetMeta meta, IEnumerable<CodeSetCode> codes)
+        internal ValueSetAddRequest(IValueSetApiService valueSetApiService, string name, ValueSetMeta meta, IEnumerable<CodeSetCode> codes)
         {
             this.valueSetApiService = valueSetApiService;
             this.name = name;
@@ -28,7 +28,7 @@
 
         public Task<Maybe<ValueSet>> Execute()
         {
-            return this.valueSetApiService.Value.AddValueSet(this);
+            return this.valueSetApiService.AddValueSet(this);
         }
 
         public ValueSetCreation BuildModel()

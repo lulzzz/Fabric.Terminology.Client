@@ -8,17 +8,17 @@
 
     public interface IApiRequestFactory
     {
-        IApiRequest<Task<Maybe<ValueSet>>> CreateValueSetSingleRequest(Guid valueSetGuid);
+        IApiRequest<Maybe<ValueSet>> CreateValueSetSingleRequest(Guid valueSetGuid);
 
-        IApiRequest<Task<IReadOnlyCollection<ValueSet>>> CreateValueSetListRequest(IEnumerable<Guid> valueSetGuids);
+        IApiRequest<IReadOnlyCollection<ValueSet>> CreateValueSetListRequest(IEnumerable<Guid> valueSetGuids);
 
-        IApiRequest<Task<PagedCollection<ValueSet>>> CreateValueSetPagedRequest(PagerSettings pagerSettings);
+        IApiRequest<PagedCollection<ValueSet>> CreateValueSetPagedRequest(PagerSettings pagerSettings);
 
-        IApiPostRequest<FindByTermQuery, Task<PagedCollection<ValueSet>>> CreateValueSetSearchRequest(
+        IApiPostRequest<FindByTermQuery, PagedCollection<ValueSet>> CreateValueSetSearchRequest(
             string term,
             PagerSettings pagerSettings);
 
-        IApiPostRequest<ValueSetCreation, Task<Maybe<ValueSet>>> CreateValueSetAddRequest(
+        IApiPostRequest<ValueSetCreation, Maybe<ValueSet>> CreateValueSetAddRequest(
             string name,
             ValueSetMeta valueSetMeta,
             IEnumerable<CodeSetCode> codes);

@@ -6,16 +6,15 @@
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetSearchRequest : ValueSetRequestBase, IApiPostRequest<FindByTermQuery, Task<PagedCollection<ValueSet>>>
+    public class ValueSetSearchRequest : ValueSetGetRequestBase, IApiPostRequest<FindByTermQuery, PagedCollection<ValueSet>>
     {
         private readonly string term;
         private readonly PagerSettings pagerSettings;
 
-        public ValueSetSearchRequest(Lazy<IValueSetApiService> service, string term, PagerSettings pagerSettings)
+        public ValueSetSearchRequest(IValueSetApiService service, string term, PagerSettings pagerSettings)
             : base(service)
         {
             this.term = term;
-            // TODO ensure pager settings
             this.pagerSettings = pagerSettings;
         }
 

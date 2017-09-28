@@ -8,14 +8,14 @@
     public static partial class Extensions
     {
         public static TRequest IncludeCodes<TRequest>(this TRequest request)
-            where TRequest : ValueSetRequestBase
+            where TRequest : ValueSetGetRequestBase
         {
             request.Summary = false;
             return request;
         }
 
         public static TRequest CodesFilteredByCodeSystem<TRequest>(this TRequest request, Guid codeSystemGuid)
-            where TRequest : ValueSetRequestBase
+            where TRequest : ValueSetGetRequestBase
         {
             request.AddCodeSytemFilter(codeSystemGuid);
             return request;
@@ -24,7 +24,7 @@
         public static TRequest CodesFilteredByCodeSystem<TRequest>(
             this TRequest request,
             IEnumerable<Guid> codeSystemGuids)
-            where TRequest : ValueSetRequestBase
+            where TRequest : ValueSetGetRequestBase
         {
             foreach (var code in codeSystemGuids.ToArray())
             {

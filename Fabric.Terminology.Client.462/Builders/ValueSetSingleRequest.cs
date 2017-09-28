@@ -6,9 +6,9 @@
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetSingleRequest : ValueSetRequestBase, IApiRequest<Task<Maybe<ValueSet>>>
+    public class ValueSetSingleRequest : ValueSetGetRequestBase, IApiRequest<Maybe<ValueSet>>
     {
-        internal ValueSetSingleRequest(Lazy<IValueSetApiService> valueSetApiService, Guid valueSetGuid)
+        internal ValueSetSingleRequest(IValueSetApiService valueSetApiService, Guid valueSetGuid)
             : base(valueSetApiService)
         {
             this.ValueSetGuid = valueSetGuid;

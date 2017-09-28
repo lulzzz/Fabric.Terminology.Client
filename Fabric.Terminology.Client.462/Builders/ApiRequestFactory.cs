@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using CallMeMaybe;
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
@@ -16,32 +15,32 @@
             this.valueSetApiService = valueSetApiService;
         }
 
-        public IApiRequest<Task<Maybe<ValueSet>>> CreateValueSetSingleRequest(Guid valueSetGuid)
+        public IApiRequest<Maybe<ValueSet>> CreateValueSetSingleRequest(Guid valueSetGuid)
         {
-            return new ValueSetSingleRequest(this.valueSetApiService, valueSetGuid);
+            return new ValueSetSingleRequest(this.valueSetApiService.Value, valueSetGuid);
         }
 
-        public IApiRequest<Task<IReadOnlyCollection<ValueSet>>> CreateValueSetListRequest(IEnumerable<Guid> valueSetGuids)
+        public IApiRequest<IReadOnlyCollection<ValueSet>> CreateValueSetListRequest(IEnumerable<Guid> valueSetGuids)
         {
-            return new ValueSetListRequest(this.valueSetApiService, valueSetGuids);
+            return new ValueSetListRequest(this.valueSetApiService.Value, valueSetGuids);
         }
 
-        public IApiRequest<Task<PagedCollection<ValueSet>>> CreateValueSetPagedRequest(PagerSettings pagerSettings)
+        public IApiRequest<PagedCollection<ValueSet>> CreateValueSetPagedRequest(PagerSettings pagerSettings)
         {
-            return new ValueSetPagedRequest(this.valueSetApiService, pagerSettings);
+            return new ValueSetPagedRequest(this.valueSetApiService.Value, pagerSettings);
         }
 
-        public IApiPostRequest<FindByTermQuery, Task<PagedCollection<ValueSet>>> CreateValueSetSearchRequest(string term, PagerSettings pagerSettings)
+        public IApiPostRequest<FindByTermQuery, PagedCollection<ValueSet>> CreateValueSetSearchRequest(string term, PagerSettings pagerSettings)
         {
-            return new ValueSetSearchRequest(this.valueSetApiService, term, pagerSettings);
+            return new ValueSetSearchRequest(this.valueSetApiService.Value, term, pagerSettings);
         }
 
-        public IApiPostRequest<ValueSetCreation, Task<Maybe<ValueSet>>> CreateValueSetAddRequest(
+        public IApiPostRequest<ValueSetCreation, Maybe<ValueSet>> CreateValueSetAddRequest(
             string name,
             ValueSetMeta valueSetMeta,
             IEnumerable<CodeSetCode> codes)
         {
-            return new ValueSetAddRequest(this.valueSetApiService, name, valueSetMeta, codes);
+            return new ValueSetAddRequest(this.valueSetApiService.Value, name, valueSetMeta, codes);
         }
     }
 }

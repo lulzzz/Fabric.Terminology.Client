@@ -7,11 +7,11 @@
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetListRequest : ValueSetRequestBase, IApiRequest<Task<IReadOnlyCollection<ValueSet>>>
+    public class ValueSetListRequest : ValueSetGetRequestBase, IApiRequest<IReadOnlyCollection<ValueSet>>
     {
         private readonly HashSet<Guid> valueSetGuids = new HashSet<Guid>();
 
-        internal ValueSetListRequest(Lazy<IValueSetApiService> valueSetApiService, IEnumerable<Guid> valueSetGuids)
+        internal ValueSetListRequest(IValueSetApiService valueSetApiService, IEnumerable<Guid> valueSetGuids)
             : base(valueSetApiService)
         {
             var setUniqueIds = valueSetGuids as Guid[] ?? valueSetGuids.ToArray();
