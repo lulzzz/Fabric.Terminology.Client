@@ -25,13 +25,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabric.Terminology.Client.4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fabric.Terminology.Client", "Fabric.Terminology.Client\Fabric.Terminology.Client.csproj", "{150C53CC-1A0E-4A2B-AB7E-9943173EB7DE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analyzers", "Analyzers", "{1C28B8B6-1C85-44ED-9C51-A04671828C7C}"
-	ProjectSection(SolutionItems) = preProject
-		Catalyst.MinimumRecommendedRules.ruleset = Catalyst.MinimumRecommendedRules.ruleset
-		Catalyst.MostRules.Error.ruleset = Catalyst.MostRules.Error.ruleset
-		Catalyst.TestRules.ruleset = Catalyst.TestRules.ruleset
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

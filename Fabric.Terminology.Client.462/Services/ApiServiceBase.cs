@@ -7,10 +7,13 @@
     using System.Net.Http.Headers;
     using System.Text;
     using System.Threading.Tasks;
+
     using CallMeMaybe;
+
     using Fabric.Terminology.Client.Configuration;
     using Fabric.Terminology.Client.Logging;
     using Fabric.Terminology.Client.Models;
+
     using Newtonsoft.Json;
 
     internal abstract class ApiServiceBase
@@ -35,8 +38,8 @@
             var json = await this.GetApiJson(url);
 
             return json.HasValue
-                ? Maybe.From(JsonConvert.DeserializeObject<TResult>(json.Single()))
-                : Maybe<TResult>.Not;
+                       ? Maybe.From(JsonConvert.DeserializeObject<TResult>(json.Single()))
+                       : Maybe<TResult>.Not;
         }
 
         protected async Task<Maybe<TResult>> PostApiResult<TResult, TModel>(string url, TModel model)
@@ -44,8 +47,8 @@
         {
             var json = await this.PostApiResult(url, model);
             return json.HasValue
-                ? Maybe.From(JsonConvert.DeserializeObject<TResult>(json.Single()))
-                : Maybe<TResult>.Not;
+                       ? Maybe.From(JsonConvert.DeserializeObject<TResult>(json.Single()))
+                       : Maybe<TResult>.Not;
         }
 
         protected async Task<IReadOnlyCollection<TResult>> GetApiResultList<TResult>(string url)
@@ -53,8 +56,8 @@
             var json = await this.GetApiJson(url);
 
             var result = json.HasValue
-                ? JsonConvert.DeserializeObject<IEnumerable<TResult>>(json.Single())
-                : Enumerable.Empty<TResult>();
+                             ? JsonConvert.DeserializeObject<IEnumerable<TResult>>(json.Single())
+                             : Enumerable.Empty<TResult>();
 
             return result.ToArray();
         }
@@ -64,8 +67,8 @@
             var json = await this.GetApiJson(url);
 
             return json.HasValue
-                ? JsonConvert.DeserializeObject<PagedCollection<TResult>>(json.Single())
-                : PagedCollection<TResult>.Empty();
+                       ? JsonConvert.DeserializeObject<PagedCollection<TResult>>(json.Single())
+                       : PagedCollection<TResult>.Empty();
         }
 
         protected async Task<PagedCollection<TResult>> PostApiResultPage<TResult, TModel>(string url, TModel model)
@@ -73,8 +76,8 @@
         {
             var json = await this.PostApiResult(url, model);
             return json.HasValue
-                ? JsonConvert.DeserializeObject<PagedCollection<TResult>>(json.Single())
-                : PagedCollection<TResult>.Empty();
+                       ? JsonConvert.DeserializeObject<PagedCollection<TResult>>(json.Single())
+                       : PagedCollection<TResult>.Empty();
         }
 
         private async Task<Maybe<string>> GetApiJson(string url)
@@ -100,7 +103,10 @@
         private async Task<Maybe<string>> PostApiResult<TModel>(string url, TModel model)
             where TModel : class
         {
-            var requestContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            var requestContent = new StringContent(
+                JsonConvert.SerializeObject(model),
+                Encoding.UTF8,
+                "application/json");
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

@@ -2,12 +2,14 @@
 {
     using System;
     using System.Threading.Tasks;
+
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
     public class ValueSetSearchRequest : ValueSetPagedRequestBase, IApiPostRequest<FindByTermQuery>
     {
         private readonly string term;
+
         private readonly PagerSettings pagerSettings;
 
         public ValueSetSearchRequest(Lazy<IValueSetApiService> service, string term, PagerSettings pagerSettings)
