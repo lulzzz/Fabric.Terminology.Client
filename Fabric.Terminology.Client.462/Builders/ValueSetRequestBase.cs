@@ -1,5 +1,4 @@
-﻿#pragma warning disable SA1402 // File may only contain a single class
-namespace Fabric.Terminology.Client.Builders
+﻿namespace Fabric.Terminology.Client.Builders
 {
     using System;
     using System.Collections.Generic;
@@ -7,63 +6,52 @@ namespace Fabric.Terminology.Client.Builders
     using System.Threading.Tasks;
     using Fabric.Terminology.Client.Services;
 
-    public abstract class ValueSetRequestBase<TResult> : ValueSetRequestBase, IApiRequest<TResult>
+    public abstract class ValueSetRequestBase<TResult> : IApiRequestWithParameters<TResult>
     {
-        protected ValueSetRequestBase(Lazy<IValueSetApiService> service)
-            : base(service)
+        private readonly IList<Guid> codeSytemGuids = new List<Guid>();
+
+        protected ValueSetRequestBase(IValueSetApiService service)
         {
+            this.ValueSetApiService = service;
         }
 
-        public abstract TResult Execute();
-    }
+        public bool Summary { get; set; } = true;
 
-    public abstract class ValueSetRequestBase
-    {
-        private readonly IList<string> codeSytemCodes = new List<string>();
+        public IEnumerable<Guid> CodeSystemGuidFilters => this.codeSytemGuids;
 
-        private readonly Lazy<IValueSetApiService> valueSetApiService;
+        protected IValueSetApiService ValueSetApiService { get; }
 
-        protected ValueSetRequestBase(Lazy<IValueSetApiService> service)
+        public void AddCodeSytemFilter(Guid codeSystemGuid)
         {
-            this.valueSetApiService = service;
-            this.Summary = true;
+            this.codeSytemGuids.Add(codeSystemGuid);
         }
 
-        internal bool Summary { get; set; }
-
-        internal IEnumerable<string> CodeSystemCodeFilters => this.codeSytemCodes;
-
-        protected IValueSetApiService ValueSetApiService => this.valueSetApiService.Value;
-
-        internal void AddCodeSytemFilter(string codeSystemCode)
-        {
-            this.codeSytemCodes.Add(codeSystemCode);
-        }
-
-        internal string BuildQueryString()
+        public string BuildQueryString()
         {
             var qs = string.Empty;
 
-            if (this.Summary)
+            if (!this.Summary)
             {
-                qs += $"$summary=true";
+                qs += $"$summary=false";
             }
 
-            if (this.CodeSystemCodeFilters.Any())
+            if (this.CodeSystemGuidFilters.Any())
             {
-                foreach (var code in this.CodeSystemCodeFilters)
-                {
-                    if (qs.Length > 0)
-                    {
-                        qs += "&";
-                    }
+                var guidlist = string.Join(",", this.CodeSystemGuidFilters);
 
-                    qs += $"codesystems={code}";
+                if (qs.Length > 0)
+                {
+                    qs += "&";
                 }
+
+                qs += $"$codesystems={guidlist}";
             }
 
             return qs.Length == 0 ? string.Empty : $"?{qs}";
         }
+
+        public abstract Task<TResult> Execute();
+
+        public abstract string GetEndpoint();
     }
 }
-#pragma warning disable SA1402 // File may only contain a single class

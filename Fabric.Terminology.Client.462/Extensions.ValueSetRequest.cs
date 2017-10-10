@@ -1,33 +1,31 @@
 ﻿namespace Fabric.Terminology.Client
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Fabric.Terminology.Client.Builders;
 
     public static partial class Extensions
     {
-        public static TRequest IncludeAllCodes<TRequest>(this TRequest request)
-            where TRequest : ValueSetRequestBase
+        public static IApiRequestWithParameters<T> IncludeCodes<T>(this IApiRequestWithParameters<T> request)
         {
             request.Summary = false;
             return request;
         }
 
-        public static TRequest CodesFilteredByCodeSystem<TRequest>(this TRequest request, string codeSystemCode)
-            where TRequest : ValueSetRequestBase
+        public static IApiRequestWithParameters<T> CodesFilteredByCodeSystem<T>(this IApiRequestWithParameters<T> request, Guid codeSystemGuid)
         {
-            request.AddCodeSytemFilter(codeSystemCode);
+            request.AddCodeSytemFilter(codeSystemGuid);
             return request;
         }
 
-        public static TRequest CodesFilteredByCodeSystem<TRequest>(
-            this TRequest request,
-            IEnumerable<string> codeSystemCodes)
-            where TRequest : ValueSetRequestBase
+        public static IApiRequestWithParameters<T> CodesFilteredByCodeSystem<T>(
+            this IApiRequestWithParameters<T> request,
+            IEnumerable<Guid> codeSystemGuids)
         {
-            foreach (var code in codeSystemCodes.ToArray())
+            foreach (var code in codeSystemGuids.ToArray())
             {
-                if (!request.CodeSystemCodeFilters.Contains(code))
+                if (!request.CodeSystemGuidFilters.Contains(code))
                 {
                     request.AddCodeSytemFilter(code);
                 }

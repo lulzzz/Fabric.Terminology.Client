@@ -1,10 +1,10 @@
 ﻿{
   "TerminologyApiUri": "http://term.local",
-  "ApiVersion": "v0.4",
-  "ValueSetMeta": {
-    "AuthoringSourceDescription": "API.Client Authoring Source Description",
-    "PurposeDescription": "API.Client Purpose Description",
-    "SourceDescription": "API.Client Source Description",
-    "VersionDescription": "API.Client Version Description" 
-  }
+  "ApiVersion": "v0.6" //,
+  //"ValueSetMeta": {
+  //  "AuthoringSourceDescription": "API.Client Authoring Source Description",
+  //  "PurposeDescription": "API.Client Purpose Description",
+  //  "SourceDescription": "API.Client Source Description",
+  //  "VersionDescription": "API.Client Version Description" 
+  //}
 }

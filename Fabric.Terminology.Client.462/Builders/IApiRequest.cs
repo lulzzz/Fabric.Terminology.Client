@@ -2,8 +2,13 @@
 {
     using System.Threading.Tasks;
 
-    public interface IApiRequest<out TResult>
+    public interface IApiRequest<TResult> : IApiRequest
     {
-        TResult Execute();
+        Task<TResult> Execute();
+    }
+
+    public interface IApiRequest
+    {
+        string GetEndpoint();
     }
 }

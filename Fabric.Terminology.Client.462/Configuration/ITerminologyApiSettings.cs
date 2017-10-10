@@ -7,7 +7,5 @@
         string TerminologyApiUri { get; }
 
         string ApiVersion { get; }
-
-        ValueSetMeta ValueSetMeta { get; }
     }
 }

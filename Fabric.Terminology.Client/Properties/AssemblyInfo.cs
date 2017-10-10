@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-[assembly: CLSCompliant(true)]
+[assembly: CLSCompliant(false)]
 
 [assembly: AssemblyTitle("Fabric.Terminology.Client")]
 [assembly: AssemblyDescription("C# .NET client for the Fabric.Terminology.API.")]

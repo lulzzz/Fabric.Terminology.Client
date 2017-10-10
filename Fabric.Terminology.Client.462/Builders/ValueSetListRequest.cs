@@ -7,17 +7,17 @@
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetListRequest : ValueSetRequestBase<Task<IReadOnlyCollection<ValueSet>>>, IApiGetRequest
+    public class ValueSetListRequest : ValueSetRequestBase<IReadOnlyCollection<ValueSet>>
     {
-        private readonly IList<string> valueSetUniqueIds = new List<string>();
+        private readonly HashSet<Guid> valueSetGuids = new HashSet<Guid>();
 
-        internal ValueSetListRequest(Lazy<IValueSetApiService> valueSetApiService, IEnumerable<string> valueSetUniqueIds)
+        internal ValueSetListRequest(IValueSetApiService valueSetApiService, IEnumerable<Guid> valueSetGuids)
             : base(valueSetApiService)
         {
-            var setUniqueIds = valueSetUniqueIds as string[] ?? valueSetUniqueIds.ToArray();
+            var setUniqueIds = valueSetGuids as Guid[] ?? valueSetGuids.ToArray();
             if (!setUniqueIds.Any())
             {
-                throw new ArgumentException($"{nameof(valueSetUniqueIds)} may not be an empty collection");
+                throw new ArgumentException($"{nameof(valueSetGuids)} may not be an empty collection");
             }
 
             this.Initialize(setUniqueIds);
@@ -28,19 +28,16 @@
             return this.ValueSetApiService.GetValueSets(this);
         }
 
-        public string GetEndpoint()
+        public override string GetEndpoint()
         {
-            return $"{string.Join(",", this.valueSetUniqueIds)}{this.BuildQueryString()}";
+            return $"{string.Join(",", this.valueSetGuids)}{this.BuildQueryString()}";
         }
 
-        private void Initialize(string[] ids)
+        private void Initialize(IEnumerable<Guid> keys)
         {
-            foreach (var id in ids)
+            foreach (var key in keys)
             {
-                if (!this.valueSetUniqueIds.Contains(id))
-                {
-                    this.valueSetUniqueIds.Add(id);
-                }
+                this.valueSetGuids.Add(key);
             }
         }
     }
