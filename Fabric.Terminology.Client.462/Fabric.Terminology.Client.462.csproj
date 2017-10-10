@@ -64,15 +64,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builders\IApiGetRequest.cs" />
+    <Compile Include="Builders\ApiRequestFactory.cs" />
     <Compile Include="Builders\IApiPostRequest.cs" />
+    <Compile Include="Builders\IApiPostRequestWithParameters.cs" />
     <Compile Include="Builders\IApiRequest.cs" />
+    <Compile Include="Builders\IApiRequestFactory.cs" />
+    <Compile Include="Builders\IApiRequestWithParameters.cs" />
     <Compile Include="Builders\ValueSetAddRequest.cs" />
+    <Compile Include="Builders\ValueSetRequestBase.cs" />
     <Compile Include="Builders\ValueSetListRequest.cs" />
     <Compile Include="Builders\ValueSetPagedRequest.cs" />
-    <Compile Include="Builders\ValueSetPagedRequestBase.cs" />
     <Compile Include="Builders\ValueSetRequest.cs" />
-    <Compile Include="Builders\ValueSetRequestBase.cs" />
     <Compile Include="Builders\ValueSetSearchRequest.cs" />
     <Compile Include="Builders\ValueSetSingleRequest.cs" />
     <Compile Include="Configuration\ITerminologyApiSettings.cs" />
@@ -88,7 +90,7 @@
     <Compile Include="Extensions.ValueSetRequest.cs">
       <DependentUpon>Extensions.cs</DependentUpon>
     </Compile>
-    <Compile Include="ITerminologyContext.cs" />
+    <Compile Include="ISharedTerminology.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\LogFactory.cs" />
     <Compile Include="Logging\SerilogAdapter.cs" />
@@ -98,16 +100,18 @@
     <Compile Include="Models\FindByTermQuery.cs" />
     <Compile Include="Models\PagedCollection{T}.cs" />
     <Compile Include="Models\PagerSettings.cs" />
-    <Compile Include="Models\TerminologyApiError.cs" />
+    <Compile Include="Exceptions\TerminologyApiError.cs" />
     <Compile Include="Models\ValueSet.cs" />
     <Compile Include="Models\ValueSetCode.cs" />
+    <Compile Include="Models\ValueSetCodeCount.cs" />
     <Compile Include="Models\ValueSetCreation.cs" />
     <Compile Include="Models\ValueSetMeta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ApiServiceBase.cs" />
+    <Compile Include="Services\ApiTransactionManager.cs" />
+    <Compile Include="Services\IApiTransactionManager.cs" />
     <Compile Include="Services\IValueSetApiService.cs" />
     <Compile Include="Services\ValueSetApiService.cs" />
-    <Compile Include="TerminologyContext.cs" />
+    <Compile Include="SharedTerminology.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

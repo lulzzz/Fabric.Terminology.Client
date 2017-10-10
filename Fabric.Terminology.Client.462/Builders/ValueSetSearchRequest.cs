@@ -1,28 +1,26 @@
 ﻿namespace Fabric.Terminology.Client.Builders
 {
-    using System;
     using System.Threading.Tasks;
 
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetSearchRequest : ValueSetPagedRequestBase, IApiPostRequest<FindByTermQuery>
+    public class ValueSetSearchRequest : ValueSetRequestBase<PagedCollection<ValueSet>>, IApiPostRequestWithParameters<FindByTermQuery, PagedCollection<ValueSet>>
     {
         private readonly string term;
 
         private readonly PagerSettings pagerSettings;
 
-        public ValueSetSearchRequest(Lazy<IValueSetApiService> service, string term, PagerSettings pagerSettings)
+        public ValueSetSearchRequest(IValueSetApiService service, string term, PagerSettings pagerSettings)
             : base(service)
         {
             this.term = term;
-            this.EnsurePagerSettings(pagerSettings);
             this.pagerSettings = pagerSettings;
         }
 
         public override Task<PagedCollection<ValueSet>> Execute()
         {
-            return this.ValueSetApiService.FindValueSetPage(this);
+            return this.ValueSetApiService.SearchValueSetPage(this);
         }
 
         public FindByTermQuery BuildModel()
@@ -30,10 +28,15 @@
             return new FindByTermQuery
             {
                 Term = this.term,
-                CodeSystemCodes = this.CodeSystemCodeFilters,
+                CodeSystemGuids = this.CodeSystemGuidFilters,
                 PagerSettings = this.pagerSettings,
                 Summary = this.Summary
             };
+        }
+
+        public override string GetEndpoint()
+        {
+            return "search";
         }
     }
 }

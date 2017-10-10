@@ -4,46 +4,47 @@
     using System.Threading.Tasks;
     using CallMeMaybe;
     using Fabric.Terminology.Client.Builders;
-    using Fabric.Terminology.Client.Configuration;
-    using Fabric.Terminology.Client.Logging;
     using Fabric.Terminology.Client.Models;
 
-    internal class ValueSetApiService : ApiServiceBase, IValueSetApiService
+    internal class ValueSetApiService : IValueSetApiService
     {
-        public ValueSetApiService(ITerminologyApiSettings settings, ILogger logger)
-            : base(settings, logger, "valuesets")
+        private readonly IApiTransactionManager transactionManager;
+
+        public ValueSetApiService(IApiTransactionManager transactionManager)
         {
+            this.transactionManager = transactionManager;
         }
+
+        private string BaseUrl => this.transactionManager.GetBaseUrl("valuesets");
 
         public Task<Maybe<ValueSet>> GetValueSet(ValueSetSingleRequest request)
         {
-            return this.GetApiResult<ValueSet>(this.BuildHttpGetUrl(request));
+            return this.transactionManager.GetApiResult<ValueSet>(this.BuildHttpGetUrl(request));
         }
 
         public Task<IReadOnlyCollection<ValueSet>> GetValueSets(ValueSetListRequest request)
         {
-            return this.GetApiResultList<ValueSet>(this.BuildHttpGetUrl(request));
+            return this.transactionManager.GetApiResultList<ValueSet>(this.BuildHttpGetUrl(request));
         }
 
         public Task<PagedCollection<ValueSet>> GetValueSetPage(ValueSetPagedRequest request)
         {
-            return this.GetApiResultPage<ValueSet>(this.BuildHttpGetUrl(request));
+            return this.transactionManager.GetApiResultPage<ValueSet>(this.BuildHttpGetUrl(request));
         }
 
-        public Task<PagedCollection<ValueSet>> FindValueSetPage(ValueSetSearchRequest request)
+        public Task<PagedCollection<ValueSet>> SearchValueSetPage(ValueSetSearchRequest request)
         {
-            return this.PostApiResultPage<ValueSet, FindByTermQuery>($"{this.BaseUrl}/find", request.BuildModel());
+            return this.transactionManager.PostApiResultPage<ValueSet, FindByTermQuery>(this.BuildHttpGetUrl(request), request.BuildModel());
         }
 
         public Task<Maybe<ValueSet>> AddValueSet(ValueSetAddRequest request)
         {
-            var model = request.BuildModel(this.ApiSettings.ValueSetMeta);
-            return this.PostApiResult<ValueSet, ValueSetCreation>(this.BaseUrl, model);
+            return this.transactionManager.PostApiResult<ValueSet, ValueSetCreation>(this.BaseUrl, request.BuildModel());
         }
 
-        private string BuildHttpGetUrl(IApiGetRequest request)
+        private string BuildHttpGetUrl(IApiRequest request)
         {
-            return $"{this.BaseUrl}/{request.GetEndpoint()}";
+            return $"{this.transactionManager.GetBaseUrl("valuesets")}/{request.GetEndpoint()}";
         }
     }
 }
