@@ -1,12 +1,14 @@
 ﻿namespace Fabric.Terminology.Client.Builders
 {
     using System.Threading.Tasks;
+
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
     public class ValueSetSearchRequest : ValueSetRequestBase<PagedCollection<ValueSet>>, IApiPostRequestWithParameters<FindByTermQuery, PagedCollection<ValueSet>>
     {
         private readonly string term;
+
         private readonly PagerSettings pagerSettings;
 
         public ValueSetSearchRequest(IValueSetApiService service, string term, PagerSettings pagerSettings)
