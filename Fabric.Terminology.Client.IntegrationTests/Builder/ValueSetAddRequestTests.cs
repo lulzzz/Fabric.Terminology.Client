@@ -1,5 +1,10 @@
-﻿namespace Fabric.Terminology.Client.IntegrationTests.Builder
+﻿using System.Linq;
+using Fabric.Terminology.Client.Models;
+
+namespace Fabric.Terminology.Client.IntegrationTests.Builder
 {
+    using System;
+    using System.Collections.Generic;
     using Fabric.Terminology.Client.TestsBase.Fixtures;
     using Fabric.Terminology.Client.TestsBase.Mocks;
     using FluentAssertions;
@@ -21,10 +26,23 @@
         public void CanAddAValueSet(string name, int codeCount)
         {
             // Arrange
-            var codes = MockApiModelBuilder.BuildCodeSetCodeCollection(codeCount);
+            var codeSystemGuids = new List<Guid>
+                {
+                    Guid.NewGuid(),
+                    Guid.NewGuid()
+                };
+            var codes = MockApiModelBuilder.BuildCodeSetCodeCollection(codeSystemGuids, codeCount);
 
             // Act
-            var query = this.TerminologyContext.ValueSets.Add(name, codes);
+            var meta = new ValueSetMeta
+            {
+                AuthoringSourceDescription = "Fabric.Terminology.Client Test",
+                DefinitionDescription = "Integration test",
+                SourceDescription = "Testing client API",
+                VersionDate = DateTime.UtcNow
+            };
+
+            var query = this.TerminologyContext.ValueSets.Add(name, meta, codes);
             var maybe = this.Profiler.ExecuteTimed(async () => await query.Execute());
 
             // Assert
@@ -32,7 +50,7 @@
             var valueSet = maybe.Single();
 
             valueSet.IsCustom.Should().BeTrue();
-            valueSet.ValueSetCodesCount.Should().Be(codeCount);
+            valueSet.CodeCounts.Sum(x => x.CodeCount).Should().Be(codeCount);
         }
     }
 }

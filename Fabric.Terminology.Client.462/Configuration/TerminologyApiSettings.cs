@@ -7,7 +7,5 @@
         public string TerminologyApiUri { get; set; }
 
         public string ApiVersion { get; set; }
-
-        public ValueSetMeta ValueSetMeta { get; set; }
     }
 }

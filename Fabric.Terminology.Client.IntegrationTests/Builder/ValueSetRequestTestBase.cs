@@ -10,9 +10,9 @@
         protected ValueSetRequestTestBase(ITestOutputHelper output, TerminologyFixture fixture)
             : base(output)
         {
-            this.TerminologyContext = fixture.TerminologyContext;
+            this.TerminologyContext = fixture.SharedTerminology;
         }
 
-        protected ITerminologyContext TerminologyContext { get; }
+        protected ISharedTerminology TerminologyContext { get; }
     }
 }

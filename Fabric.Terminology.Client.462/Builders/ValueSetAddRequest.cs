@@ -8,39 +8,45 @@
     using Fabric.Terminology.Client.Models;
     using Fabric.Terminology.Client.Services;
 
-    public class ValueSetAddRequest : IApiRequest<Task<Maybe<ValueSet>>>
+    public class ValueSetAddRequest : IApiPostRequest<ValueSetCreation, Maybe<ValueSet>>
     {
-        private readonly Lazy<IValueSetApiService> lazy;
+        private readonly IValueSetApiService valueSetApiService;
 
-        internal ValueSetAddRequest(Lazy<IValueSetApiService> valueSetApiService, string name, IEnumerable<CodeSetCode> codes)
+        private readonly string name;
+
+        private readonly ValueSetMeta meta;
+
+        private readonly IReadOnlyCollection<CodeSetCode> codes;
+
+        internal ValueSetAddRequest(IValueSetApiService valueSetApiService, string name, ValueSetMeta meta, IEnumerable<CodeSetCode> codes)
         {
-            this.lazy = valueSetApiService;
-            this.Name = name;
-            this.Codes = codes.ToArray();
+            this.valueSetApiService = valueSetApiService;
+            this.name = name;
+            this.meta = meta;
+            this.codes = codes.ToArray();
         }
-
-        protected IValueSetApiService ValueSetApiService => this.lazy.Value;
-
-        protected string Name { get; }
-
-        protected IReadOnlyCollection<CodeSetCode> Codes { get; }
 
         public Task<Maybe<ValueSet>> Execute()
         {
-            return this.ValueSetApiService.AddValueSet(this);
+            return this.valueSetApiService.AddValueSet(this);
         }
 
-        public ValueSetCreation BuildModel(ValueSetMeta meta)
+        public ValueSetCreation BuildModel()
         {
             return new ValueSetCreation
             {
-                VersionDescription = meta.VersionDescription,
-                AuthoringSourceDescription = meta.AuthoringSourceDescription,
-                PurposeDescription = meta.PurposeDescription,
-                SourceDescription = meta.SourceDescription,
-                CodeSetCodes = this.Codes,
-                Name = this.Name
+                VersionDate = DateTime.UtcNow,
+                AuthoringSourceDescription = this.meta.AuthoringSourceDescription,
+                DefinitionDescription = this.meta.DefinitionDescription,
+                SourceDescription = this.meta.SourceDescription,
+                CodeSetCodes = this.codes,
+                Name = this.name
             };
+        }
+
+        public string GetEndpoint()
+        {
+            return string.Empty;
         }
     }
 }

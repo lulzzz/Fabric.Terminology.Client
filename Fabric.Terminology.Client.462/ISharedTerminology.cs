@@ -2,7 +2,7 @@
 {
     using Fabric.Terminology.Client.Builders;
 
-    public interface ITerminologyContext
+    public interface ISharedTerminology
     {
         ValueSetRequest ValueSets { get; }
     }
